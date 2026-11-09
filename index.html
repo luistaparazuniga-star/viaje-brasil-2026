@@ -70,8 +70,43 @@
         </header>
 
         <!-- Contenido Principal -->
-        <main class="p-4 md:p-8">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-5">
+        <main class="p-4 md:p-8 space-y-5">
+            <!-- Selector de Variante: Plan A vs Plan B -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 bg-gradient-to-r from-indigo-50 via-blue-50 to-amber-50 border border-indigo-200/80 rounded-2xl no-print">
+                <div class="flex items-center gap-2.5">
+                    <span class="p-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-xs">
+                        <i class="fa-solid fa-route"></i>
+                    </span>
+                    <div>
+                        <span class="text-xs font-bold text-slate-800 block">Variantes de Plan de Viaje:</span>
+                        <span class="text-[11px] text-slate-500">Alterna entre la tabla original y el Plan B de contingencia</span>
+                    </div>
+                </div>
+                <div class="inline-flex rounded-xl p-1 bg-white border border-slate-200 shadow-xs gap-1">
+                    <button id="btn-plan-a" onclick="switchTablePlan('A')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+                        <span>🅰️ Plan A: Equilibrado</span>
+                        <span class="text-[10px] text-slate-400 font-normal hidden sm:inline">(2d Río + 2d SP)</span>
+                    </button>
+                    <button id="btn-plan-b" onclick="switchTablePlan('B')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-white shadow-xs">
+                        <span>🅱️ Plan B: +1 Día Río & Aeropuerto</span>
+                        <span class="text-[10px] bg-amber-700 text-amber-100 font-bold px-1.5 py-0.5 rounded">Respaldo Clima</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Banner Estratégico Plan B -->
+            <div id="plan-b-table-banner" class="p-4 rounded-xl bg-amber-50 border border-amber-300 text-slate-800 space-y-2 no-print">
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-600 font-bold text-sm"><i class="fa-solid fa-shield-halved"></i></span>
+                    <h4 class="text-xs font-extrabold text-amber-950 uppercase tracking-wide">Estrategia Plan B: +1 Día en Río & Cero Riesgo de Vuelo</h4>
+                </div>
+                <p class="text-xs text-amber-900/90 leading-relaxed">
+                    <strong>Lunes 17:</strong> Día colchón en Copacabana para rescatar visitas al Cristo o Pan de Azúcar si hay lluvia. Noche en Bus Leito Cama 180° a SP.<br>
+                    <strong>Miércoles 18:</strong> Llegada a SP 05:30 AM ➔ Lockers en GRU / Shopping Internacional Guarulhos (compras a 12 min del aeropuerto) ➔ <strong>13:00 ya en GRU</strong> con 0 riesgo de tráfico.
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                 <p class="text-xs sm:text-sm text-slate-500 flex items-center gap-1.5">
                     <i class="fa-solid fa-circle-info text-blue-500"></i>
                     <span>Haz clic en cualquier celda para editar el texto. Los cambios se sincronizan en tu navegador.</span>
@@ -135,8 +170,10 @@
 
     <script>
         const STORAGE_KEY = 'brasil_2026_table_v3';
+        const STORAGE_PLAN_KEY = 'brasil_2026_table_plan_variant';
 
-        const defaultData = [
+        // 🅰️ PLAN A: Equilibrado (2 Días en Río + 2 Días en SP)
+        const defaultDataPlanA = [
             { 
                 date: "12 Nov", 
                 city: "São Paulo", 
@@ -195,7 +232,68 @@
             }
         ];
 
+        // 🅱️ PLAN B: +1 Día Colchón en Río (Clima) & Retorno Seguro al Aeropuerto
+        const defaultDataPlanB = [
+            { 
+                date: "12 Nov", 
+                city: "São Paulo", 
+                activity: "Aterrizaje en GRU (18:10). Uber al hospedaje en Jardins / Paulista. Cena ligera.", 
+                mobility: "Cero esfuerzo físico. Ascensor directo y reposo tras el vuelo.",
+                ticketUrl: "",
+                ticketLabel: "Vuelo AQP ➔ GRU"
+            },
+            { 
+                date: "13 Nov", 
+                city: "São Paulo", 
+                activity: "Av. Paulista, MASP y Mirador Sesc (Piso 17). Parque Ibirapuera. A las 23:30 Bus Leito Cama 180° a Río.", 
+                mobility: "Sesc con ascensores rápidos. En la noche se viaja acostado 180° durmiendo cómodamente.",
+                ticketUrl: "https://www.autoviacao1001.com.br",
+                ticketLabel: "Bus Leito SP ➔ Río"
+            },
+            { 
+                date: "14 Nov", 
+                city: "Río de Janeiro", 
+                activity: "Llegada a las 06:00 a Río. Check-in en Copacabana Posto 4-5. Tarde y atardecer en quioscos de la playa.", 
+                mobility: "Caminar exclusivamente por el calçadão pavimentado, evitando la arena blanda.",
+                ticketUrl: "https://www.airbnb.com",
+                ticketLabel: "Airbnb Copacabana"
+            },
+            { 
+                date: "15 Nov", 
+                city: "Río de Janeiro", 
+                activity: "¡CRISTO REDENTOR! Subida en Trem do Corcovado. Tarde relajada en Jardín Botánico.", 
+                mobility: "3 ascensores panorámicos y 4 escaleras mecánicas arriba. Si hay niebla, Plan B permite permutar con lunes.",
+                ticketUrl: "https://www.tremdocorcovado.rio",
+                ticketLabel: "Tickets Trem do Corcovado"
+            },
+            { 
+                date: "16 Nov", 
+                city: "Río de Janeiro", 
+                activity: "Pan de Azúcar (Bondinho) en teleférico. Tarde en Fuerte de Copacabana. Noche en Copacabana (3ra noche Río).", 
+                mobility: "Teleférico 100% accesible con rampas. Sin traslados nocturnos hoy, descanso en departamento.",
+                ticketUrl: "https://bondinho.com.br",
+                ticketLabel: "Tickets Pan de Azúcar"
+            },
+            { 
+                date: "17 Nov", 
+                city: "Río -> SP", 
+                activity: "¡DÍA EXTRA EN RÍO (RESPALDO CLIMA / PASEO LIBRE)! Ipanema o Cristo si llovió antes. 23:00 Bus Leito Cama a SP.", 
+                mobility: "Día colchón si el clima impidió visitar alguna maravilla. Viaje nocturno 100% acostados.",
+                ticketUrl: "https://www.autoviacao1001.com.br",
+                ticketLabel: "Bus Leito Río ➔ SP"
+            },
+            { 
+                date: "18 Nov", 
+                city: "SP -> GRU", 
+                activity: "Llegada 05:30 AM a SP Tietê. Lockers en GRU / Shopping Internacional Guarulhos (compras). 13:00 en GRU.", 
+                mobility: "Cero tráfico del centro de SP. Compras en mall 100% plano a 12 min de GRU. A las 13:00 ya en aeropuerto.",
+                ticketUrl: "https://www.gru.com.br",
+                ticketLabel: "Guía Aeropuerto GRU"
+            }
+        ];
+
         let itineraryData = [];
+        let tablePlanVariant = 'B';
 
         function getCityBadgeClass(city) {
             const c = (city || '').toLowerCase();
@@ -210,17 +308,78 @@
 
         function loadData() {
             try {
-                const saved = localStorage.getItem(STORAGE_KEY);
+                tablePlanVariant = localStorage.getItem(STORAGE_PLAN_KEY) || 'B';
+                const key = tablePlanVariant === 'A' ? 'brasil_2026_table_plan_a' : 'brasil_2026_table_plan_b';
+                const saved = localStorage.getItem(key);
                 if (saved) {
                     itineraryData = JSON.parse(saved);
                 } else {
-                    itineraryData = JSON.parse(JSON.stringify(defaultData));
+                    itineraryData = JSON.parse(JSON.stringify(tablePlanVariant === 'A' ? defaultDataPlanA : defaultDataPlanB));
                 }
             } catch (e) {
                 console.error("Error al cargar datos:", e);
-                itineraryData = JSON.parse(JSON.stringify(defaultData));
+                tablePlanVariant = 'B';
+                itineraryData = JSON.parse(JSON.stringify(defaultDataPlanB));
             }
             renderTable();
+            updateTablePlanButtonsUI();
+        }
+
+        function saveData() {
+            try {
+                const key = tablePlanVariant === 'A' ? 'brasil_2026_table_plan_a' : 'brasil_2026_table_plan_b';
+                localStorage.setItem(key, JSON.stringify(itineraryData));
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(itineraryData));
+                localStorage.setItem(STORAGE_PLAN_KEY, tablePlanVariant);
+                showSaveBadge();
+            } catch (e) {
+                console.error("Error al guardar:", e);
+            }
+        }
+
+        function switchTablePlan(variant) {
+            tablePlanVariant = variant;
+            localStorage.setItem(STORAGE_PLAN_KEY, variant);
+
+            const key = variant === 'A' ? 'brasil_2026_table_plan_a' : 'brasil_2026_table_plan_b';
+            const saved = localStorage.getItem(key);
+            if (saved) {
+                try {
+                    itineraryData = JSON.parse(saved);
+                } catch(e) {
+                    itineraryData = JSON.parse(JSON.stringify(variant === 'A' ? defaultDataPlanA : defaultDataPlanB));
+                }
+            } else {
+                itineraryData = JSON.parse(JSON.stringify(variant === 'A' ? defaultDataPlanA : defaultDataPlanB));
+            }
+
+            saveData();
+            renderTable();
+            updateTablePlanButtonsUI();
+        }
+
+        function updateTablePlanButtonsUI() {
+            const btnA = document.getElementById('btn-plan-a');
+            const btnB = document.getElementById('btn-plan-b');
+            const bannerB = document.getElementById('plan-b-table-banner');
+
+            if (tablePlanVariant === 'B') {
+                if (btnB) {
+                    btnB.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-white shadow-xs";
+                }
+                if (btnA) {
+                    btnA.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
+                }
+                if (bannerB) bannerB.classList.remove('hidden');
+            } else {
+                if (btnA) {
+                    btnA.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-indigo-600 text-white shadow-xs";
+                }
+                if (btnB) {
+                    btnB.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
+                }
+                if (bannerB) bannerB.classList.add('hidden');
+            }
         }
 
         function saveData() {
@@ -353,8 +512,9 @@
         }
 
         function resetData() {
-            if (confirm("¿Restaurar el itinerario original? Se perderán las modificaciones locales.")) {
-                itineraryData = JSON.parse(JSON.stringify(defaultData));
+            const planName = tablePlanVariant === 'A' ? "Plan A (Equilibrado)" : "Plan B (+1 Día Río & Aeropuerto)";
+            if (confirm(`¿Restaurar el ${planName}? Se perderán las modificaciones locales de esta variante.`)) {
+                itineraryData = JSON.parse(JSON.stringify(tablePlanVariant === 'A' ? defaultDataPlanA : defaultDataPlanB));
                 saveData();
                 renderTable();
             }
@@ -372,33 +532,9 @@
 
         // Inicialización
         document.addEventListener('DOMContentLoaded', loadData);
-
-        function addRow() {
-            itineraryData.push({
-                date: "Nuevo Día",
-                city: "Destino",
-                activity: "Describe las actividades programadas...",
-                mobility: "Recomendaciones o descansos requeridos."
-            });
-            saveData();
-            renderTable();
-        }
-
-        function removeRow(index) {
-            if (confirm("¿Estás seguro de eliminar este día del itinerario?")) {
-                itineraryData.splice(index, 1);
-                saveData();
-                renderTable();
-            }
-        }
-
-        function resetData() {
-            if (confirm("¿Restaurar el itinerario original? Se perderán las modificaciones locales.")) {
-                itineraryData = JSON.parse(JSON.stringify(defaultData));
-                saveData();
-                renderTable();
-            }
-        }
+    </script>
+</body>
+</html>
 
         function escapeHtml(str) {
             if (!str) return '';

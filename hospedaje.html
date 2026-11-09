@@ -246,6 +246,73 @@
                     </div>
                 </div>
 
+                <!-- Selector de Variante: Plan A vs Plan B -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 bg-gradient-to-r from-indigo-50 via-blue-50 to-amber-50 border border-indigo-200/80 rounded-2xl">
+                    <div class="flex items-center gap-2.5">
+                        <span class="p-2 bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-xs">
+                            <i class="fa-solid fa-route"></i>
+                        </span>
+                        <div>
+                            <span class="text-xs font-bold text-slate-800 block">Variantes de Plan de Viaje:</span>
+                            <span class="text-[11px] text-slate-500">Alterna entre el plan original o el Plan B con colchón de clima</span>
+                        </div>
+                    </div>
+                    <div class="inline-flex rounded-xl p-1 bg-white border border-slate-200 shadow-xs gap-1">
+                        <button id="btn-plan-a" onclick="switchPlan('A')" class="px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900">
+                            <span>🅰️ Plan A: Equilibrado</span>
+                            <span class="text-[10px] text-slate-400 font-normal hidden sm:inline">(2d Río + 2d SP)</span>
+                        </button>
+                        <button id="btn-plan-b" onclick="switchPlan('B')" class="px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-white shadow-xs">
+                            <span>🅱️ Plan B: +1 Día Río & Aeropuerto</span>
+                            <span class="text-[10px] bg-amber-700 text-amber-100 font-bold px-1.5 py-0.5 rounded">Respaldo Clima</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Banner Estratégico Detallado del Plan B -->
+                <div id="plan-b-info-banner" class="p-4 sm:p-5 rounded-2xl bg-amber-50/90 border-2 border-amber-300 text-slate-800 space-y-3">
+                    <div class="flex items-start justify-between gap-2">
+                        <div class="flex items-center gap-2.5">
+                            <span class="p-2 bg-amber-500 text-white rounded-xl text-sm shadow-xs">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </span>
+                            <div>
+                                <h4 class="text-sm font-extrabold text-amber-950 flex items-center gap-2">
+                                    <span>Plan B Activo: Protección Climática & Retorno Blindado</span>
+                                    <span class="text-[10px] bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">Recomendado</span>
+                                </h4>
+                                <p class="text-xs text-amber-800">Gana 1 día más en Río para asegurar Cristo/Pan de Azúcar con sol y garantiza estar a la 1:00 PM (13:00) en el Aeropuerto GRU sin estrés ni riesgo de tráfico.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                        <div class="bg-white p-3.5 rounded-xl border border-amber-200 space-y-1.5 shadow-2xs">
+                            <p class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i class="fa-solid fa-cloud-sun-rain text-amber-600"></i> +1 Día Colchón en Río:
+                            </p>
+                            <p class="text-slate-600 leading-relaxed">
+                                Si llueve o hay niebla en el Corcovado durante el fin de semana, el <strong>Lunes 17</strong> se sube con cielo despejado sin perder la maravilla. Dormimos 3 noches seguidas en Copacabana.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-xl border border-amber-200 space-y-1.5 shadow-2xs">
+                            <p class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i class="fa-solid fa-boxes-packing text-blue-600"></i> Custodia de Maletas de Madrugada:
+                            </p>
+                            <p class="text-slate-600 leading-relaxed">
+                                Llegamos a SP a las 05:30 AM en Bus Leito Cama. En vez de pagar otro hotel o meternos al tráfico del centro, vamos directo a GRU (Lockers Malex T2/T3) o al <strong>Shopping Internacional Guarulhos</strong>.
+                            </p>
+                        </div>
+                        <div class="bg-white p-3.5 rounded-xl border border-amber-200 space-y-1.5 shadow-2xs">
+                            <p class="font-bold text-slate-900 flex items-center gap-1.5">
+                                <i class="fa-solid fa-plane-circle-check text-emerald-600"></i> 13:00 en GRU (Cero Tráfico):
+                            </p>
+                            <p class="text-slate-600 leading-relaxed">
+                                Paseo de compras relajadas (Havaianas baratas, café gourmet, chocolates) a 12 min de GRU. A la <strong>1:00 PM</strong> ya estamos instalados dentro del aeropuerto con almuerzo y tiempo de sobra.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flex flex-wrap items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
                     <div class="flex items-center gap-2 text-slate-600">
                         <i class="fa-solid fa-pen-to-square text-blue-600"></i>
@@ -753,17 +820,18 @@
         const STORAGE_OPTIONS_SP    = 'brasil_2026_sp_v2';
         const STORAGE_OPTIONS_RIO   = 'brasil_2026_rio_v2';
         const STORAGE_DAYS          = 'brasil_2026_itinerary_days_v4';
+        const STORAGE_PLAN_VARIANT  = 'brasil_2026_plan_variant_v1';
         const STORAGE_VOTES         = 'brasil_2026_votes_v2';
         const STORAGE_BEDS          = 'brasil_2026_beds_v2';
         const STORAGE_FEEDBACK      = 'brasil_2026_feedback_v2';
         const STORAGE_ROUTE         = 'brasil_2026_route_v2';
 
-        // Días por defecto del Itinerario
-        const defaultItineraryDays = [
+        // 🅰️ PLAN A: Equilibrado (2 Días en Río + 2 Días en São Paulo)
+        const defaultItineraryDaysPlanA = [
             {
                 dayNum: "12",
                 month: "Nov",
-                title: "Día 1: Miércoles • Llegada a Brasil & Reposo",
+                title: "Día 1: Miércoles • Llegada a Brasil & Reposo en São Paulo",
                 city: "São Paulo • Hospedaje en Jardins / Paulista",
                 badge: "Aterrizaje 18:10 (GRU)",
                 badgeIcon: "fa-plane-arrival",
@@ -850,6 +918,101 @@
                 mobility: "Criterio de Salud: Salida a GRU con 4 horas de margen para evitar prisas y solicitar asistencia con carrito/silla en mostrador.",
                 ticketUrl: "",
                 ticketLabel: "Vuelo GRU ➔ AQP"
+            }
+        ];
+
+        // 🅱️ PLAN B: +1 Día Colchón en Río por Clima/Turismo & Retorno Blindado a Aeropuerto
+        const defaultItineraryDaysPlanB = [
+            {
+                dayNum: "12",
+                month: "Nov",
+                title: "Día 1: Miércoles • Llegada a Brasil & Reposo en São Paulo",
+                city: "São Paulo • Hospedaje en Jardins / Paulista",
+                badge: "Aterrizaje 18:10 (GRU)",
+                badgeIcon: "fa-plane-arrival",
+                badgeColor: "bg-slate-200 text-slate-700",
+                description: "Llegada al Aeropuerto de Guarulhos (GRU). Traslado directo en Uber Comfort o Black al Airbnb en Jardins / Paulista (45-60 min). Check-in asistido sin escaleras, cena ligera en el departamento y descanso absoluto para reponer energías.",
+                mobility: "Criterio de Salud: Cero esfuerzo físico tras el vuelo internacional. Uso exclusivo de ascensor y descanso en cama confortable.",
+                ticketUrl: "",
+                ticketLabel: "Vuelo AQP ➔ GRU"
+            },
+            {
+                dayNum: "13",
+                month: "Nov",
+                title: "Día 2: Jueves • São Paulo Cultural ➔ Bus Leito Cama a Río (Noche)",
+                city: "São Paulo • Mirador SESC & Parque Ibirapuera",
+                badge: "Bus Leito 180° (Ahorro de Vuelo)",
+                badgeIcon: "fa-bed",
+                badgeColor: "bg-purple-100 text-purple-900",
+                description: "Día en SP: Paseo suave por Av. Paulista, vista al MASP y subida al Mirador SESC (Piso 17, ascensor panorámico). Tarde relajada en el Parque Ibirapuera junto al lago. Noche (23:30): Uber al Terminal Tietê para abordar el Bus Leito Cama 180° hacia Río de Janeiro. Se viaja totalmente acostado, con aire acondicionado, frazada y almohada. Ahorramos cientos de dólares de avión y 1 noche de hotel.",
+                mobility: "Criterio de Salud: El asiento Leito se reclina a 180° plano. Permite dormir toda la noche descansando la espalda sin la fatiga de un avión estrecho.",
+                ticketUrl: "https://www.autoviacao1001.com.br",
+                ticketLabel: "Boleto Bus Leito SP ➔ Río"
+            },
+            {
+                dayNum: "14",
+                month: "Nov",
+                title: "Día 3: Viernes • Llegada a Río de Janeiro & Tarde en Copacabana",
+                city: "Río de Janeiro • Check-in & Brisa Marina",
+                badge: "Copacabana Posto 4-5",
+                badgeIcon: "fa-water",
+                badgeColor: "bg-cyan-200 text-cyan-900",
+                description: "Mañana (06:00): Llegada al Terminal Novo Río. Uber directo de 15 minutos al Airbnb en Copacabana (Posto 4-5). Check-in / custodia de equipaje, ducha caliente y desayuno relajado. Tarde: Paseo tranquilo por el calçadão (vereda pavimentada) de Copacabana, atardecer y agua de coco fría en quioscos frente al mar sin pisar arena blanda.",
+                mobility: "Criterio de Salud: Tarde relajada para aclimatar el cuerpo y descansar bien para la subida al Cristo al día siguiente.",
+                ticketUrl: "https://www.airbnb.com",
+                ticketLabel: "Reserva Airbnb Copacabana"
+            },
+            {
+                dayNum: "15",
+                month: "Nov",
+                title: "Día 4: Sábado • ¡Ascenso al Cristo Redentor (Corcovado)! ⛪",
+                city: "Río de Janeiro • Maravilla del Mundo",
+                badge: "Trem do Corcovado + Ascensores",
+                badgeIcon: "fa-train",
+                badgeColor: "bg-amber-200 text-amber-900",
+                description: "Mañana (08:00): Uber a la Estación Cosme Velho. Subida en el histórico Trem do Corcovado (20 min) a través de la Floresta da Tijuca. Al llegar arriba, usamos los 3 ascensores panorámicos y 4 escaleras mecánicas para llegar directamente a los pies del Cristo (¡Cero escaleras a pie!). Vistas de 360° de toda la ciudad. Tarde: Almuerzo y visita relajada al Jardín Botánico (senderos planos y sombreados). Si hoy hubiera niebla o lluvia, el Plan B permite intercambiar este día con el lunes.",
+                mobility: "Criterio de Salud: Cero escaleras a pie en el Corcovado. Uso exclusivo de los ascensores y escaleras mecánicas en la cima.",
+                ticketUrl: "https://www.tremdocorcovado.rio",
+                ticketLabel: "Entradas Oficiales Cristo Redentor"
+            },
+            {
+                dayNum: "16",
+                month: "Nov",
+                title: "Día 5: Domingo • Pan de Azúcar (Teleférico) & Tarde Carioca",
+                city: "Río de Janeiro • Bahía de Guanabara",
+                badge: "Teleférico 100% Accesible",
+                badgeIcon: "fa-cable-car",
+                badgeColor: "bg-indigo-100 text-indigo-800",
+                description: "Mañana: Teleférico del Pan de Azúcar (Bondinho) en Urca. Rampas y ascensores en cada estación, vistas maravillosas de la bahía y cafetería con terraza. Tarde: Almuerzo marinero y tarde de descanso con vista al mar en el Fuerte de Copacabana (Confeitaria Colombo). En el Plan B dormimos en Copacabana (¡3 noches seguidas de hospedaje en Río!), sin prisas de retorno hoy.",
+                mobility: "Criterio de Salud: Día sin apuros de traslados nocturnos. Dormimos confortablemente en el departamento de Copacabana.",
+                ticketUrl: "https://bondinho.com.br",
+                ticketLabel: "Tickets Pan de Azúcar"
+            },
+            {
+                dayNum: "17",
+                month: "Nov",
+                title: "Día 6: Lunes • ¡Día Extra en Río (Respaldo Clima) ➔ Bus Leito Nocturno a SP! 🚌💤",
+                city: "Río de Janeiro ➔ Retorno Cómodo en Bus Cama 180°",
+                badge: "Día Colchón Clima / Turismo",
+                badgeIcon: "fa-sun",
+                badgeColor: "bg-emerald-100 text-emerald-900",
+                description: "¡Día Salvavidas Climático!: Si llovió o hubo niebla en el Corcovado el fin de semana, hoy subimos al Cristo o Pan de Azúcar con sol radiante. Si ya se visitaron, disfrutamos de un día carioca libre: Ipanema, Parque Lage, compras de artesanías o almuerzo de despedida en una churrascaría tradicional frente al mar. Check-out del Airbnb (con custodia de equipaje). Noche (23:00): Abordamos el Bus Leito Cama 180° en Terminal Novo Río para viajar totalmente acostados hacia São Paulo, ahorrando otra noche de hotel.",
+                mobility: "Criterio de Salud: El viaje nocturno en cama 180° permite recuperar el cuerpo acostado mientras nos trasladamos hacia el aeropuerto.",
+                ticketUrl: "https://www.autoviacao1001.com.br",
+                ticketLabel: "Boleto Bus Leito Río ➔ SP"
+            },
+            {
+                dayNum: "18",
+                month: "Nov",
+                title: "Día 7: Miércoles • Llegada Madrugada SP ➔ Custodia Maletas ➔ 13:00 en GRU ✈️",
+                city: "São Paulo ➔ Aeropuerto GRU • ¡Cero Riesgo de Vuelo!",
+                badge: "13:00 en Aeropuerto GRU",
+                badgeIcon: "fa-plane-departure",
+                badgeColor: "bg-blue-600 text-white",
+                description: "Madrugada (05:30): Llegada al Terminal Tietê de São Paulo en Bus Leito. Estrategia Logística Blindada: En lugar de pagar otro hotel o arriesgarse al caótico tráfico del centro de SP, tomamos un Uber directo (20 min) hacia el área de Guarulhos. Opciones de mañana: (1) Dejar equipaje en Custodia Oficial de GRU (Malex / Bag Transfer en T2 o T3), o (2) Desayunar y comprar regalos de última hora en el Shopping Internacional de Guarulhos (plano, aire acondicionado, Havaianas, cafés gourmet y chocolates a precio local sin escaleras). A la 1:00 PM (13:00) ya estamos cómodamente instalados en GRU para el vuelo internacional con 0 estrés y 0 riesgo de tráfico.",
+                mobility: "Criterio de Salud: Eliminamos el tráfico agresivo del centro de São Paulo. A las 13:00 estamos en el aeropuerto, con tiempo de sobra para almuerzo relajado y solicitar carrito o silla en mostrador.",
+                ticketUrl: "https://www.gru.com.br",
+                ticketLabel: "Guía Servicios Aeropuerto GRU"
             }
         ];
 
@@ -942,10 +1105,12 @@
         let votes = {};
         let beds = [];
         let selectedRoute = 'litoral';
+        let currentPlanVariant = 'B';
 
         function initApp() {
             loadState();
             renderItineraryCards();
+            updatePlanButtonsUI();
             renderSpOptions();
             renderRioOptions();
             renderBeds();
@@ -959,8 +1124,15 @@
 
         function loadState() {
             try {
-                const sDays = localStorage.getItem(STORAGE_DAYS);
-                itineraryDays = sDays ? JSON.parse(sDays) : JSON.parse(JSON.stringify(defaultItineraryDays));
+                currentPlanVariant = localStorage.getItem(STORAGE_PLAN_VARIANT) || 'B';
+                const planKey = currentPlanVariant === 'A' ? 'brasil_2026_days_plan_a' : 'brasil_2026_days_plan_b';
+                const sDays = localStorage.getItem(planKey);
+                
+                if (sDays) {
+                    itineraryDays = JSON.parse(sDays);
+                } else {
+                    itineraryDays = JSON.parse(JSON.stringify(currentPlanVariant === 'A' ? defaultItineraryDaysPlanA : defaultItineraryDaysPlanB));
+                }
 
                 const sSp = localStorage.getItem(STORAGE_OPTIONS_SP);
                 spOptions = sSp ? JSON.parse(sSp) : defaultSpOptions;
@@ -977,7 +1149,8 @@
                 selectedRoute = localStorage.getItem(STORAGE_ROUTE) || 'litoral';
             } catch (e) {
                 console.error(e);
-                itineraryDays = JSON.parse(JSON.stringify(defaultItineraryDays));
+                currentPlanVariant = 'B';
+                itineraryDays = JSON.parse(JSON.stringify(defaultItineraryDaysPlanB));
                 spOptions = defaultSpOptions;
                 rioOptions = defaultRioOptions;
                 votes = {};
@@ -987,13 +1160,61 @@
         }
 
         function saveAll() {
+            const planKey = currentPlanVariant === 'A' ? 'brasil_2026_days_plan_a' : 'brasil_2026_days_plan_b';
+            localStorage.setItem(planKey, JSON.stringify(itineraryDays));
             localStorage.setItem(STORAGE_DAYS, JSON.stringify(itineraryDays));
+            localStorage.setItem(STORAGE_PLAN_VARIANT, currentPlanVariant);
             localStorage.setItem(STORAGE_OPTIONS_SP, JSON.stringify(spOptions));
             localStorage.setItem(STORAGE_OPTIONS_RIO, JSON.stringify(rioOptions));
             localStorage.setItem(STORAGE_VOTES, JSON.stringify(votes));
             localStorage.setItem(STORAGE_BEDS, JSON.stringify(beds));
             localStorage.setItem(STORAGE_ROUTE, selectedRoute);
             flashSavedBadge();
+        }
+
+        function switchPlan(variant) {
+            currentPlanVariant = variant;
+            localStorage.setItem(STORAGE_PLAN_VARIANT, variant);
+
+            const planKey = variant === 'A' ? 'brasil_2026_days_plan_a' : 'brasil_2026_days_plan_b';
+            const saved = localStorage.getItem(planKey);
+            if (saved) {
+                try {
+                    itineraryDays = JSON.parse(saved);
+                } catch(e) {
+                    itineraryDays = JSON.parse(JSON.stringify(variant === 'A' ? defaultItineraryDaysPlanA : defaultItineraryDaysPlanB));
+                }
+            } else {
+                itineraryDays = JSON.parse(JSON.stringify(variant === 'A' ? defaultItineraryDaysPlanA : defaultItineraryDaysPlanB));
+            }
+
+            saveAll();
+            renderItineraryCards();
+            updatePlanButtonsUI();
+        }
+
+        function updatePlanButtonsUI() {
+            const btnA = document.getElementById('btn-plan-a');
+            const btnB = document.getElementById('btn-plan-b');
+            const bannerB = document.getElementById('plan-b-info-banner');
+
+            if (currentPlanVariant === 'B') {
+                if (btnB) {
+                    btnB.className = "px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-white shadow-xs";
+                }
+                if (btnA) {
+                    btnA.className = "px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
+                }
+                if (bannerB) bannerB.classList.remove('hidden');
+            } else {
+                if (btnA) {
+                    btnA.className = "px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-indigo-600 text-white shadow-xs";
+                }
+                if (btnB) {
+                    btnB.className = "px-3.5 py-2 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
+                }
+                if (bannerB) bannerB.classList.add('hidden');
+            }
         }
 
         function flashSavedBadge() {
@@ -1142,8 +1363,9 @@
         }
 
         function resetItineraryDays() {
-            if (confirm("¿Restaurar el itinerario original con el Cristo Redentor? Se reiniciarán los cambios locales.")) {
-                itineraryDays = JSON.parse(JSON.stringify(defaultItineraryDays));
+            const planName = currentPlanVariant === 'A' ? "Plan A (Equilibrado)" : "Plan B (+1 Día en Río & Logística Aeropuerto)";
+            if (confirm(`¿Restaurar el ${planName}? Se reiniciarán las ediciones locales de esta variante.`)) {
+                itineraryDays = JSON.parse(JSON.stringify(currentPlanVariant === 'A' ? defaultItineraryDaysPlanA : defaultItineraryDaysPlanB));
                 saveAll();
                 renderItineraryCards();
             }
@@ -1247,7 +1469,8 @@
         }
 
         function shareItineraryWhatsApp() {
-            let txt = `📅 *ITINERARIO FAMILIAR BRASIL 2026 (12-18 NOV)*\n_Con Cristo Redentor & Sin vuelos caros_\n\n`;
+            const planTitle = currentPlanVariant === 'B' ? "PLAN B (+1 Día Río / Respaldo Clima & Aeropuerto 13:00)" : "PLAN A (Equilibrado SP + Río)";
+            let txt = `📅 *ITINERARIO FAMILIAR BRASIL 2026 (12-18 NOV)*\n_${planTitle}_\n_Con Cristo Redentor & Sin vuelos caros_\n\n`;
             itineraryDays.forEach(d => {
                 txt += `🗓️ *${d.dayNum} ${d.month}:* ${d.title}\n• ${d.city} [${d.badge}]\n• ${d.description}\n`;
                 if (d.ticketUrl && d.ticketUrl.trim() !== "") {
