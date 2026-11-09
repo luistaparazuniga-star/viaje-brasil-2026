@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador de Viaje: Brasil 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        [contenteditable="true"]:hover {
+            background-color: rgba(239, 246, 255, 0.6);
+            border-radius: 4px;
+        }
+        [contenteditable="true"]:focus {
+            background-color: #ffffff;
+            outline: 2px solid #3b82f6;
+            outline-offset: -1px;
+            border-radius: 4px;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .shadow-lg {
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen p-3 md:p-8 font-sans text-slate-800">
+
+    <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200/80">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-700 via-blue-600 to-indigo-700 p-6 md:p-8 text-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-white/20 text-white text-xs px-2.5 py-0.5 rounded-full font-medium tracking-wide flex items-center gap-1.5">
+                        <i class="fa-solid fa-plane-departure text-[10px]"></i> Logística Familiar
+                    </span>
+                    <span id="save-status" class="text-xs bg-emerald-500/30 text-emerald-100 border border-emerald-400/30 px-2 py-0.5 rounded-full transition-opacity duration-300 opacity-0">
+                        Guardado ✓
+                    </span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight">Planificador de Viaje: SP & Litoral 2026</h1>
+                <p class="text-sm text-blue-100/90 mt-1 flex items-center gap-2">
+                    <i class="fa-regular fa-calendar"></i> 12 Nov - 18 Nov &bull; 
+                    <i class="fa-solid fa-person-walking-with-cane"></i> Ritmo adaptado para movilidad moderada
+                </p>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-2 no-print">
+                <a href="hospedaje.html" class="bg-emerald-500 hover:bg-emerald-400 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-house-chimney-window"></i> Ver Airbnbs
+                </a>
+                <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-print"></i> Imprimir / PDF
+                </button>
+                <button onclick="addRow()" class="bg-blue-500 hover:bg-blue-400 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-plus"></i> Añadir Día
+                </button>
+                <button onclick="resetData()" class="bg-rose-900/40 hover:bg-rose-900/60 border border-rose-300/30 text-rose-100 text-xs px-3 py-2 rounded-lg font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-left"></i> Restaurar Original
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenido Principal -->
+        <main class="p-4 md:p-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-5">
+                <p class="text-xs sm:text-sm text-slate-500 flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-info text-blue-500"></i>
+                    <span>Haz clic en cualquier celda para editar el texto. Los cambios se sincronizan en tu navegador.</span>
+                </p>
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">7 Días &bull; 2 Ciudades</span>
+            </div>
+            
+            <div class="overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-600 border-b border-slate-200">
+                            <th class="p-3.5 w-24">Fecha</th>
+                            <th class="p-3.5 w-36">Ciudad</th>
+                            <th class="p-3.5">Actividades Principales</th>
+                            <th class="p-3.5 w-72">Ajuste de Movilidad</th>
+                            <th class="p-3.5 w-12 text-center no-print">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itinerary-body" class="divide-y divide-slate-100 text-sm">
+                        <!-- Las filas se generarán por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Resumen de Recomendaciones de Movilidad y Salud -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 rounded-xl bg-blue-50/70 border border-blue-100">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-blue-800 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-van-shuttle"></i> Transporte & Traslados
+                    </h3>
+                    <p class="text-xs text-blue-900/80 leading-relaxed">
+                        Priorizar Uber Comfort o Black para accesos directos puerta a puerta. En aeropuertos solicitar asistencia en silla de ruedas o carrito eléctrico con anticipación.
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-100">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-amber-800 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-shoe-prints"></i> Terrenos y Pisadas
+                    </h3>
+                    <p class="text-xs text-amber-900/80 leading-relaxed">
+                        Calzado amortiguador y con agarre. Evitar la arena suelta en Copacabana; transitar siempre por la ciclovía y vereda de mosaico portugués nivelado.
+                    </p>
+                </div>
+                <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-100">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-heart-pulse"></i> Pausas de Descanso
+                    </h3>
+                    <p class="text-xs text-emerald-900/80 leading-relaxed">
+                        Intervalos de descanso cada 45-60 minutos de caminata leve. Paradas estratégicas en miradores, cafeterías y centros culturales con aire acondicionado.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-50 border-t border-slate-100 px-6 py-4 text-xs text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>Logística de Viaje &bull; Brasil 2026</div>
+            <div class="no-print">Datos persistentes vía LocalStorage del navegador</div>
+        </footer>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'brasil_2026_itinerary_v2';
+
+        const defaultData = [
+            { date: "12 Nov", city: "São Paulo", activity: "Aterrizaje en GRU (18:10). Uber al hospedaje en Jardins / Paulista. Cena ligera.", mobility: "Cero esfuerzo físico. Ascensor directo y reposo tras el vuelo." },
+            { date: "13 Nov", city: "São Paulo", activity: "Avenida Paulista, vista al MASP y Mirador Sesc (Piso 17). Tarde en Parque Ibirapuera.", mobility: "Sesc tiene ascensores rápidos. En Ibirapuera, descansar junto al lago o usar carrito." },
+            { date: "14 Nov", city: "Playa Santos", activity: "Traslado en Uber/Van (1h 15m) a Santos (Gonzaga). Check-in frente al mar y paseo al atardecer.", mobility: "Autopista moderna sin curvas bruscas. Vereda de playa 100% plana sin arena blanda." },
+            { date: "15 Nov", city: "Playa Santos", activity: "Jardines de la Playa (Récord Guinness) y visita al Palacio & Museo Oficial del Café.", mobility: "Museo con ascensor histórico. Cafetería con servicio a la mesa sin colas." },
+            { date: "16 Nov", city: "Santos -> SP", activity: "Mañana de sol y brisa marina. Almuerzo costero. Retorno cómodo por autopista a São Paulo.", mobility: "Traslado terrestre descansado. Tarde libre para descansar en el departamento." },
+            { date: "17 Nov", city: "São Paulo", activity: "Barrio Japonés Liberdade (gastronomía y compras). Tarde en centro cultural.", mobility: "Bajar del Uber en la parte alta de Galvão Bueno para caminar en bajada sin esfuerzo." },
+            { date: "18 Nov", city: "São Paulo", activity: "Mercado Municipal (almuerzo en Mezanino). Salida a GRU a las 15:00 para vuelo a AQP (19:10).", mobility: "En el mercado, subir directo en ascensor al segundo piso para comer con tranquilidad." }
+        ];
+
+        let itineraryData = [];
+
+        function getCityBadgeClass(city) {
+            const c = (city || '').toLowerCase();
+            if (c.includes('paulo') || c.includes('sp')) {
+                return 'bg-blue-100 text-blue-700 border-blue-200';
+            }
+            if (c.includes('río') || c.includes('rio')) {
+                return 'bg-emerald-100 text-emerald-700 border-emerald-200';
+            }
+            return 'bg-purple-100 text-purple-700 border-purple-200';
+        }
+
+        function loadData() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    itineraryData = JSON.parse(saved);
+                } else {
+                    itineraryData = JSON.parse(JSON.stringify(defaultData));
+                }
+            } catch (e) {
+                console.error("Error al cargar datos:", e);
+                itineraryData = JSON.parse(JSON.stringify(defaultData));
+            }
+            renderTable();
+        }
+
+        function saveData() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(itineraryData));
+                showSaveBadge();
+            } catch (e) {
+                console.error("Error al guardar:", e);
+            }
+        }
+
+        function showSaveBadge() {
+            const badge = document.getElementById('save-status');
+            if (badge) {
+                badge.style.opacity = '1';
+                clearTimeout(window._saveTimeout);
+                window._saveTimeout = setTimeout(() => {
+                    badge.style.opacity = '0';
+                }, 1400);
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('itinerary-body');
+            tbody.innerHTML = '';
+
+            itineraryData.forEach((row, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50/80 transition group';
+
+                tr.innerHTML = `
+                    <td class="p-3.5 font-semibold text-slate-700 align-top">
+                        <div contenteditable="true" onblur="updateCell(${index}, 'date', this.innerText)" class="px-2 py-1">${escapeHtml(row.date)}</div>
+                    </td>
+                    <td class="p-3.5 align-top">
+                        <div class="flex items-center gap-1.5">
+                            <span class="inline-block px-2.5 py-1 rounded-md text-xs font-semibold border ${getCityBadgeClass(row.city)}">
+                                <span contenteditable="true" onblur="updateCityCell(${index}, this.innerText)">${escapeHtml(row.city)}</span>
+                            </span>
+                        </div>
+                    </td>
+                    <td class="p-3.5 text-slate-700 align-top leading-relaxed">
+                        <div contenteditable="true" onblur="updateCell(${index}, 'activity', this.innerText)" class="px-2 py-1">${escapeHtml(row.activity)}</div>
+                    </td>
+                    <td class="p-3.5 text-slate-600 align-top leading-relaxed bg-amber-50/30">
+                        <div contenteditable="true" onblur="updateCell(${index}, 'mobility', this.innerText)" class="px-2 py-1">${escapeHtml(row.mobility)}</div>
+                    </td>
+                    <td class="p-3.5 align-top text-center no-print">
+                        <button onclick="removeRow(${index})" title="Eliminar fila" class="opacity-0 group-hover:opacity-100 text-rose-400 hover:text-rose-600 p-1.5 rounded transition">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateCell(index, field, value) {
+            if (itineraryData[index]) {
+                itineraryData[index][field] = value.trim();
+                saveData();
+            }
+        }
+
+        function updateCityCell(index, value) {
+            if (itineraryData[index]) {
+                itineraryData[index].city = value.trim();
+                saveData();
+                renderTable();
+            }
+        }
+
+        function addRow() {
+            itineraryData.push({
+                date: "Nuevo Día",
+                city: "Destino",
+                activity: "Describe las actividades programadas...",
+                mobility: "Recomendaciones o descansos requeridos."
+            });
+            saveData();
+            renderTable();
+        }
+
+        function removeRow(index) {
+            if (confirm("¿Estás seguro de eliminar este día del itinerario?")) {
+                itineraryData.splice(index, 1);
+                saveData();
+                renderTable();
+            }
+        }
+
+        function resetData() {
+            if (confirm("¿Restaurar el itinerario original? Se perderán las modificaciones locales.")) {
+                itineraryData = JSON.parse(JSON.stringify(defaultData));
+                saveData();
+                renderTable();
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

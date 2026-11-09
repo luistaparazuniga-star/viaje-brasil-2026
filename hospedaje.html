@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospedajes & Rutas Brasil 2026 | Planificador Familiar</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .vote-btn.active {
+            transform: scale(1.05);
+            border-color: currentColor;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        [contenteditable="true"]:hover {
+            outline: 2px dashed #38bdf8;
+            outline-offset: 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        [contenteditable="true"]:focus {
+            outline: 2px solid #0284c7;
+            background: #ffffff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+    <!-- Top Announcement Bar: Decisión de Ahorro -->
+    <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-cyan-800 text-white text-xs py-2 px-4 shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-400 text-slate-900 uppercase tracking-wider">
+                    ⚡ Ahorro Inteligente
+                </span>
+                <span class="font-medium">Eliminamos vuelos internos caros (~$600-$900 USD de ahorro familiar). ¡Nuevas rutas accesibles!</span>
+            </div>
+            <div class="flex items-center gap-3 text-emerald-100 text-xs">
+                <span><i class="fa-regular fa-calendar mr-1"></i> 12 al 18 Nov</span>
+                <span id="global-save-badge" class="bg-emerald-800/80 px-2 py-0.5 rounded-full text-[11px] font-semibold text-emerald-200 border border-emerald-400/30">
+                    Sincronizado auto ✓
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm backdrop-blur-md bg-white/95">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-blue-600 flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-house-chimney-window text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold text-slate-900 leading-tight">Planificador Familiar: Hospedajes & Rutas</h1>
+                    <p class="text-xs text-slate-500 hidden sm:block">Vota opciones, compara rutas y define los lugares a visitar</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button onclick="openNewAirbnbModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-sm transition">
+                    <i class="fa-solid fa-plus text-xs"></i>
+                    <span class="hidden sm:inline">Agregar</span> Airbnb
+                </button>
+                <button onclick="exportFamilySummary()" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition" title="Copiar resumen para WhatsApp">
+                    <i class="fa-solid fa-copy text-slate-500"></i>
+                    <span class="hidden md:inline">Copiar</span> Resumen
+                </button>
+                <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition">
+                    <i class="fa-solid fa-route"></i>
+                    <span class="hidden sm:inline">Ver</span> Itinerario
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-1 w-full space-y-8">
+
+        <!-- Welcome Banner Sister & Family -->
+        <section class="rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+            <div class="relative z-10 max-w-3xl space-y-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold">
+                    <i class="fa-solid fa-compass text-amber-400"></i> Actualización Estratégica
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">¡Familia! Optimizamos la ruta para viajar mejor y gastar mucho menos 🌴</h2>
+                <p class="text-sm text-slate-300 leading-relaxed">
+                    Los vuelos internos a Río de Janeiro están a precios abusivos. Al <strong>eliminar el avión</strong>, nos ahorramos entre <span class="text-amber-300 font-bold">$600 y $900 USD</span> que podemos aprovechar en mejores hospedajes con ascensor, excelente comida y paseos más cómodos.
+                    Revisen abajo las <strong class="text-emerald-300">3 propuestas de rutas</strong> y voten su favorita:
+                </p>
+                <div class="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-300">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-piggy-bank text-amber-400"></i> Gran ahorro familiar</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-elevator text-emerald-400"></i> 100% Accesible con Ascensor</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-bus-simple text-cyan-400"></i> Traslados terrestres relajados</span>
+                </div>
+            </div>
+            <div class="absolute -right-6 -bottom-6 opacity-10 text-white text-9xl pointer-events-none">
+                <i class="fa-solid fa-umbrella-beach"></i>
+            </div>
+        </section>
+
+        <!-- Propuestas de Rutas Estratégicas (Cards de Decisión) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-emerald-600"></i> Las 3 Propuestas de Ruta Alternativa
+                    </h3>
+                    <p class="text-xs text-slate-500">¿Qué estilo de viaje prefieren para esta semana?</p>
+                </div>
+                <span class="text-xs bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-full">Hagan clic en la ruta para ver detalles</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Ruta 1: São Paulo + Litoral Paulista (Santos / Guarujá) -->
+                <div onclick="selectRoute('litoral')" id="route-card-litoral" class="cursor-pointer bg-white rounded-2xl p-5 border-2 border-emerald-500 shadow-md hover:shadow-lg transition space-y-3 relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            ⭐ La Más Recomendada
+                        </span>
+                        <span class="text-xs font-black text-emerald-600">Playa + Ciudad</span>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-900 leading-snug">
+                        São Paulo + Litoral Santos / Guarujá
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        3 días en São Paulo (cultura/comida) + 3 días en la playa en Santos/Guarujá. 
+                        <strong>A solo 1h 15min en Uber o Van directa.</strong>
+                    </p>
+                    <div class="p-3 bg-emerald-50/70 rounded-xl text-[11px] text-emerald-900 space-y-1">
+                        <p class="font-bold flex items-center gap-1"><i class="fa-solid fa-wheelchair text-emerald-600"></i> Accesibilidad:</p>
+                        <p>Los jardines de la playa de Santos son los más largos del mundo y 100% planos sin esfuerzo.</p>
+                    </div>
+                </div>
+
+                <!-- Ruta 2: São Paulo Cultural Total + Escapada Sierra -->
+                <div onclick="selectRoute('sp-total')" id="route-card-sp-total" class="cursor-pointer bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition space-y-3 relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            Comodidad Máxima
+                        </span>
+                        <span class="text-xs font-black text-blue-600">1 Solo Airbnb</span>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-900 leading-snug">
+                        São Paulo Completo + Campos do Jordão
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Un solo Airbnb de lujo en Jardins/Paulista con piscina y ascensor para toda la semana. Cero maletas de aquí para allá.
+                    </p>
+                    <div class="p-3 bg-blue-50/70 rounded-xl text-[11px] text-blue-900 space-y-1">
+                        <p class="font-bold flex items-center gap-1"><i class="fa-solid fa-mug-hot text-blue-600"></i> Gastronomía & Confort:</p>
+                        <p>Liberdade japonesa, museos con ascensor, Parque Ibirapuera y escapada de 1 día a la sierra.</p>
+                    </div>
+                </div>
+
+                <!-- Ruta 3: Río de Janeiro en Bus Leito Nocturno -->
+                <div onclick="selectRoute('rio-bus')" id="route-card-rio-bus" class="cursor-pointer bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition space-y-3 relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-purple-100 text-purple-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+                            Aventura Río
+                        </span>
+                        <span class="text-xs font-black text-purple-600">Bus Cama 180°</span>
+                    </div>
+                    <h4 class="text-base font-bold text-slate-900 leading-snug">
+                        Río de Janeiro en Bus Leito (Nocturno)
+                    </h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Si quieren ver el Cristo y Copacabana: viajar de noche durmiendo en bus cama ejecutivo (~$30 USD vs $200 de vuelo).
+                    </p>
+                    <div class="p-3 bg-purple-50/70 rounded-xl text-[11px] text-purple-900 space-y-1">
+                        <p class="font-bold flex items-center gap-1"><i class="fa-solid fa-bed text-purple-600"></i> Ahorro & Descanso:</p>
+                        <p>Ahorra 1 noche de hotel y se viaja acostado. Llegada directa al amanecer en Río.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs for Airbnb Options -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+            <div class="flex items-center gap-2 bg-slate-200/80 p-1 rounded-xl">
+                <button id="tab-btn-sp" onclick="switchCityTab('sp')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-blue-700 shadow-sm">
+                    <i class="fa-solid fa-city text-blue-600"></i> 1. São Paulo (Jardins / Paulista)
+                </button>
+                <button id="tab-btn-beach" onclick="switchCityTab('beach')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-umbrella-beach text-emerald-600"></i> 2. Playa Santos / Guarujá
+                </button>
+                <button id="tab-btn-places" onclick="switchCityTab('places')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-landmark text-purple-600"></i> 3. Lugares a Visitar
+                </button>
+                <button id="tab-btn-calc" onclick="switchCityTab('calc')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-calculator text-amber-600"></i> 4. Presupuesto & Camas
+                </button>
+            </div>
+
+            <div class="text-xs text-slate-500 font-medium">
+                <span class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md font-bold">
+                    <i class="fa-solid fa-check mr-1"></i> Ahorro en Vuelos: +$700 USD
+                </span>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 1: SÃO PAULO AIRBNBS (BASE PRINCIPAL) -->
+        <!-- ========================================== -->
+        <section id="section-sp" class="space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                        Opciones de Airbnb en São Paulo (Zona Segura con Ascensor)
+                    </h3>
+                    <p class="text-xs text-slate-500">Barrio Cerqueira César / Jardins: terreno llano, supermercados y farmacias a 100m</p>
+                </div>
+                <div class="flex items-center gap-2" id="sp-option-buttons">
+                    <!-- Dinámico por JS -->
+                </div>
+            </div>
+
+            <div id="sp-card-container">
+                <!-- Se inyecta dinámicamente con JS -->
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: LITORAL SANTOS / GUARUJÁ AIRBNBS    -->
+        <!-- ========================================== -->
+        <section id="section-beach" class="space-y-6 hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                        Opciones de Airbnb en la Playa (Santos / Guarujá)
+                    </h3>
+                    <p class="text-xs text-slate-500">Frente al mar, con ascensor y piscina, a solo 1h 15min de São Paulo por autopista moderna</p>
+                </div>
+                <div class="flex items-center gap-2" id="beach-option-buttons">
+                    <!-- Dinámico por JS -->
+                </div>
+            </div>
+
+            <div id="beach-card-container">
+                <!-- Se inyecta dinámicamente con JS -->
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: PROPUESTAS DE LUGARES A VISITAR     -->
+        <!-- ========================================== -->
+        <section id="section-places" class="space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-camera-retro text-purple-600"></i> Propuestas de Lugares Imperdibles & Accesibles
+                    </h3>
+                    <p class="text-xs text-slate-500">Seleccionados meticulosamente: 100% accesibles, cómodos para sentarse y con ascensor</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <!-- Lugar 1: Av. Paulista & Mirador Sesc -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 space-y-3">
+                        <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80" class="h-44 w-full object-cover" alt="Av Paulista">
+                        <div class="p-4 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded text-[10px]">São Paulo</span>
+                                <span class="text-slate-400">Gratis / Ascensor</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900">Avenida Paulista & Mirador SESC</h4>
+                            <p class="text-slate-600">Subida en ascensor rápido al piso 17 con vista panorámica de la ciudad y cafetería con terraza plana.</p>
+                            <span class="inline-block text-[11px] text-emerald-700 font-semibold">♿ Muy fácil y descansado</span>
+                        </div>
+                    </div>
+
+                    <!-- Lugar 2: Barrio Liberdade -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 space-y-3">
+                        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=600&q=80" class="h-44 w-full object-cover" alt="Liberdade">
+                        <div class="p-4 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-rose-100 text-rose-700 font-bold px-2 py-0.5 rounded text-[10px]">São Paulo</span>
+                                <span class="text-slate-400">Gastronomía</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900">Barrio Japonés de Liberdade</h4>
+                            <p class="text-slate-600">La comunidad japonesa más grande fuera de Japón. Luces tradicionales, pastelerías y tiendas exóticas.</p>
+                            <span class="inline-block text-[11px] text-blue-700 font-semibold">🚕 Bajar del Uber arriba para caminar en bajada</span>
+                        </div>
+                    </div>
+
+                    <!-- Lugar 3: Parque Ibirapuera -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 space-y-3">
+                        <img src="https://images.unsplash.com/photo-1583275479278-8561d5f2a245?auto=format&fit=crop&w=600&q=80" class="h-44 w-full object-cover" alt="Ibirapuera">
+                        <div class="p-4 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded text-[10px]">São Paulo</span>
+                                <span class="text-slate-400">Naturaleza</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900">Parque Ibirapuera & Lago</h4>
+                            <p class="text-slate-600">El Central Park de Brasil. Alquiler de carritos eléctricos o descanso bajo los árboles frente al lago.</p>
+                            <span class="inline-block text-[11px] text-emerald-700 font-semibold">♿ Senderos pavimentados y bancos cada 30m</span>
+                        </div>
+                    </div>
+
+                    <!-- Lugar 4: Jardines de la Playa de Santos -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 space-y-3">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" class="h-44 w-full object-cover" alt="Santos Playa">
+                        <div class="p-4 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-teal-100 text-teal-700 font-bold px-2 py-0.5 rounded text-[10px]">Santos Litoral</span>
+                                <span class="text-slate-400">Playa / Récord Guinness</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900">Jardines de la Playa & Vereda Marítima</h4>
+                            <p class="text-slate-600">Más de 5 km de flores y palmeras frente al mar. Vereda ancha y 100% plana para tomar agua de coco.</p>
+                            <span class="inline-block text-[11px] text-emerald-700 font-semibold">♿ Cero arena pesada, todo pavimentado</span>
+                        </div>
+                    </div>
+
+                    <!-- Lugar 5: Museo del Café & Centro Histórico -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 space-y-3">
+                        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80" class="h-44 w-full object-cover" alt="Museo del Café">
+                        <div class="p-4 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded text-[10px]">Santos Litoral</span>
+                                <span class="text-slate-400">Historia & Cata</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900">Palacio y Museo Oficial del Café</h4>
+                            <p class="text-slate-600">Antigua bolsa del café con vitrales hermosos, ascensor histórico y la mejor cafetería de autor de Brasil.</p>
+                            <span class="inline-block text-[11px] text-amber-700 font-semibold">☕ Experiencia relajada sentados</span>
+                        </div>
+                    </div>
+
+                    <!-- Lugar 6: Mercado Municipal (Mezanino) -->
+                    <div class="bg-slate-50 rounded-xl overflow-hidden border border-slate-200 space-y-3">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" class="h-44 w-full object-cover" alt="Mercado Municipal">
+                        <div class="p-4 space-y-2 text-xs">
+                            <div class="flex justify-between items-center">
+                                <span class="bg-blue-100 text-blue-700 font-bold px-2 py-0.5 rounded text-[10px]">São Paulo</span>
+                                <span class="text-slate-400">Gastronomía</span>
+                            </div>
+                            <h4 class="font-bold text-sm text-slate-900">Mercado Municipal ("Mercadão")</h4>
+                            <p class="text-slate-600">Famoso sándwich de mortadela artesanal y pastel de bacalao. Subida directa en ascensor al segundo piso.</p>
+                            <span class="inline-block text-[11px] text-blue-700 font-semibold">♿ Comer sentados con servicio a la mesa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: CALCULADORA & ASIGNACIÓN DE CAMAS   -->
+        <!-- ========================================== -->
+        <section id="section-calc" class="space-y-6 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Calculadora con desglose del Ahorro en Vuelos -->
+                <div class="lg:col-span-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-calculator text-emerald-600"></i> Calculadora de Ahorro y Estadía
+                        </h4>
+                        <span class="text-xs bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded font-bold">Sin Vuelos Caros</span>
+                    </div>
+
+                    <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-2 text-xs">
+                        <p class="font-bold text-emerald-900 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Comparativa de Ahorro Real:
+                        </p>
+                        <div class="flex justify-between text-slate-600">
+                            <span>Vuelos internos cancelados (4 personas):</span>
+                            <span class="font-bold text-rose-600 line-through">-$750 USD</span>
+                        </div>
+                        <div class="flex justify-between text-slate-600">
+                            <span>Traslado terrestre / Van / Bus Leito:</span>
+                            <span class="font-bold text-emerald-700">+$120 USD</span>
+                        </div>
+                        <div class="pt-1 border-t border-emerald-200 flex justify-between font-black text-emerald-800 text-sm">
+                            <span>¡Ahorro directo en el bolsillo!:</span>
+                            <span>+$630 USD</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-xs">
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Costo noche Airbnb ($USD aprox)</label>
+                            <input type="range" id="calc-night" min="50" max="180" step="5" value="85" oninput="updateCalculator()" class="w-full accent-blue-600 cursor-pointer">
+                            <div class="flex justify-between text-slate-500 mt-1">
+                                <span>$50</span>
+                                <span class="font-bold text-blue-700 text-sm" id="calc-night-val">$85 / noche (6 noches = $510)</span>
+                                <span>$180</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">Tarifa de Limpieza / Servicio total ($USD)</label>
+                            <input type="number" id="calc-cleaning" value="60" oninput="updateCalculator()" class="w-full p-2 rounded-lg border border-slate-200 text-sm font-semibold">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-slate-700 mb-1">¿Entre cuántas personas se divide?</label>
+                            <select id="calc-people" onchange="updateCalculator()" class="w-full p-2 rounded-lg border border-slate-200 text-sm font-semibold">
+                                <option value="1">1 persona (Costo total)</option>
+                                <option value="2">2 personas</option>
+                                <option value="3">3 personas</option>
+                                <option value="4" selected>4 personas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Total box -->
+                    <div class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-4 rounded-xl shadow-md text-center space-y-1">
+                        <p class="text-xs uppercase tracking-wider font-semibold text-blue-200">Total Hospedaje 6 Noches</p>
+                        <p class="text-3xl font-black" id="calc-total-usd">$570 USD</p>
+                        <p class="text-xs text-blue-100 pt-1" id="calc-per-person">Solo ~$143 USD por persona</p>
+                    </div>
+                </div>
+
+                <!-- Asignación de Camas -->
+                <div class="lg:col-span-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                        <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-bed text-blue-600"></i> Distribución de Camas
+                        </h4>
+                        <span class="text-xs text-slate-400">Personaliza y guarda</span>
+                    </div>
+
+                    <p class="text-xs text-slate-500">
+                        Asigna los nombres para que la familia tenga claro quién duerme en cada dormitorio:
+                    </p>
+
+                    <div class="space-y-3" id="bed-assignment-list">
+                        <!-- Generado por JS -->
+                    </div>
+
+                    <button onclick="saveBeds()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition shadow-sm">
+                        Guardar Distribución de Cuartos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sister & Family Feedback Sync Section -->
+        <section class="bg-gradient-to-r from-indigo-950 via-slate-900 to-blue-950 rounded-2xl p-6 sm:p-8 text-white shadow-xl space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-white/10 pb-4">
+                <div>
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-amber-400"></i> Votación y Notas de la Familia
+                    </h3>
+                    <p class="text-xs text-slate-300">Escribe aquí tu opinión sobre las opciones de Airbnb o la ruta preferida</p>
+                </div>
+                <button onclick="shareWhatsAppFull()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold transition shadow-md">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Voto a la Familia por WhatsApp
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div class="md:col-span-7 space-y-2">
+                    <textarea id="family-feedback-text" rows="3" 
+                              class="w-full text-xs text-slate-900 bg-white rounded-xl p-3 border-0 focus:ring-2 focus:ring-emerald-400 focus:outline-none placeholder-slate-400"
+                              placeholder="Ej: A mí me gusta la Opción 1 de São Paulo y pasar los últimos días en la playa de Santos..."></textarea>
+                    <div class="flex justify-between items-center pt-1">
+                        <span id="feedback-save-status" class="text-[11px] text-emerald-400"></span>
+                        <button onclick="saveFeedback()" class="px-3.5 py-1.5 bg-white/20 hover:bg-white/30 text-white text-xs font-semibold rounded-lg transition">
+                            Guardar Nota
+                        </button>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 bg-white/5 border border-white/10 p-4 rounded-xl space-y-2 text-xs">
+                    <p class="font-bold text-amber-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-notes-medical"></i> Recomendación de Guillermo (Salud & Ergonomía):
+                    </p>
+                    <ul class="space-y-1 text-slate-300 list-disc list-inside">
+                        <li>Evitar aeropuertos secundarios reduce filas de 3 horas de pie.</li>
+                        <li>En Santos, la vereda de playa es 100% plana y pavimentada con sombra.</li>
+                        <li>Los Ubers en SP y Santos son muy baratos y nos dejan en la puerta del ascensor.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal: Agregar Airbnb -->
+    <div id="new-airbnb-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-house-medical text-blue-600"></i> Agregar Nuevo Airbnb
+                </h4>
+                <button onclick="closeNewAirbnbModal()" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="new-airbnb-form" onsubmit="saveNewAirbnb(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Destino</label>
+                    <select id="modal-city" class="w-full p-2 rounded-lg border border-slate-200">
+                        <option value="sp">São Paulo (Jardins / Paulista)</option>
+                        <option value="beach">Playa Santos / Guarujá</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Título del Airbnb</label>
+                    <input type="text" id="modal-title" placeholder="Ej: Departamento con balcón y piscina" required class="w-full p-2 rounded-lg border border-slate-200">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Barrio / Ubicación</label>
+                    <input type="text" id="modal-neighborhood" placeholder="Ej: Jardins (a 2 cdras de Av. Paulista)" required class="w-full p-2 rounded-lg border border-slate-200">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Precio x noche ($USD)</label>
+                        <input type="number" id="modal-price" placeholder="85" required class="w-full p-2 rounded-lg border border-slate-200">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">¿Ascensor?</label>
+                        <select id="modal-elevator" class="w-full p-2 rounded-lg border border-slate-200">
+                            <option value="Sí, garantizado">Sí, garantizado</option>
+                            <option value="No / Por confirmar">No / Por confirmar</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Enlace de Airbnb</label>
+                    <input type="url" id="modal-url" placeholder="https://airbnb.com/rooms/..." required class="w-full p-2 rounded-lg border border-slate-200">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Detalles de Habitaciones / Camas</label>
+                    <textarea id="modal-beds" rows="2" placeholder="Ej: 2 dormitorios: 1 Queen + 2 camas de 1 plaza..." class="w-full p-2 rounded-lg border border-slate-200"></textarea>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeNewAirbnbModal()" class="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold shadow-sm">
+                        Guardar Opción
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-400 space-y-1">
+        <p>Viaje Familiar Brasil 2026 &bull; Planificación inteligente, cómoda y segura para todos.</p>
+        <p class="text-[11px] text-slate-400">Todos los cambios se guardan automáticamente en tu navegador.</p>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        const STORAGE_OPTIONS_SP    = 'brasil_2026_sp_v2';
+        const STORAGE_OPTIONS_BEACH = 'brasil_2026_beach_v2';
+        const STORAGE_VOTES         = 'brasil_2026_votes_v2';
+        const STORAGE_BEDS          = 'brasil_2026_beds_v2';
+        const STORAGE_FEEDBACK      = 'brasil_2026_feedback_v2';
+        const STORAGE_ROUTE         = 'brasil_2026_route_v2';
+
+        // Opciones por defecto São Paulo
+        const defaultSpOptions = [
+            {
+                id: 'sp-1',
+                title: 'Opción 1: Departamento Familiar en Jardins / Paulista',
+                neighborhood: 'Cerqueira César / Jardins (A 2 cdras de Av. Paulista)',
+                price: 80,
+                elevator: 'Sí, 2 ascensores modernos a nivel de calle',
+                url: 'https://www.airbnb.com/s/Jardins--Sao-Paulo--Brazil',
+                img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80',
+                thumbs: [
+                    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80',
+                    'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80',
+                    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80'
+                ],
+                beds: '2 Dormitorios: 1 Cama Matrimonial Queen + 2 Camas confortables.',
+                baths: '2 Baños completos',
+                mobilityNote: 'Entrada plana a nivel de acera. Supermercado Pão de Açúcar y Farmacia a 150m.',
+                isRecommended: true
+            },
+            {
+                id: 'sp-2',
+                title: 'Opción 2: Apartamento con Piscina Climatizada en Bela Vista',
+                neighborhood: 'Bela Vista / Paulista (Cerca a centros culturales y teatros)',
+                price: 85,
+                elevator: 'Sí, ascensor amplio y rampa',
+                url: 'https://www.airbnb.com/s/Bela-Vista--Sao-Paulo--Brazil',
+                img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80',
+                thumbs: [
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80'
+                ],
+                beds: '2 Dormitorios independientes + Sofá cama amplio en sala.',
+                baths: '2 Baños',
+                mobilityNote: 'Edificio de alto estándar con piscina para relajar los músculos al regresar.',
+                isRecommended: false
+            }
+        ];
+
+        // Opciones por defecto Litoral Santos / Guarujá
+        const defaultBeachOptions = [
+            {
+                id: 'beach-1',
+                title: 'Opción 1: Vista al Mar y Vereda de Playa en Santos (Gonzaga)',
+                neighborhood: 'Barrio Gonzaga, Santos (La mejor zona comercial y segura)',
+                price: 75,
+                elevator: 'Sí, ascensor y conserjería 24 horas',
+                url: 'https://www.airbnb.com/s/Gonzaga--Santos--State-of-Sao-Paulo--Brazil',
+                img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
+                thumbs: [
+                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80'
+                ],
+                beds: '2 Dormitorios con vista a la playa: 1 Cama Matrimonial + 2 Camas de 1 plaza.',
+                baths: '2 Baños completos',
+                mobilityNote: 'Cruzas la calle y estás en la vereda de mosaico con sombra y quioscos.',
+                isRecommended: true
+            },
+            {
+                id: 'beach-2',
+                title: 'Opción 2: Condominio Cerrado en Guarujá (Pitangueiras)',
+                neighborhood: 'Praia de Pitangueiras, Guarujá (A pasos de restaurantes y shopping)',
+                price: 90,
+                elevator: 'Sí, 2 ascensores directos',
+                url: 'https://www.airbnb.com/s/Guaruja--State-of-Sao-Paulo--Brazil',
+                img: 'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80',
+                thumbs: [
+                    'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80'
+                ],
+                beds: '2 Dormitorios suites + Sala luminosa.',
+                baths: '2 Baños',
+                mobilityNote: 'Playa con oleaje tranquilo y acera muy transitable.',
+                isRecommended: false
+            }
+        ];
+
+        // Camas
+        const defaultBeds = [
+            { room: 'Dormitorio 1 (Principal)', bedType: 'Cama Matrimonial King / Queen', assignedTo: 'Papás / Hermana' },
+            { room: 'Dormitorio 2 (Cama 1)', bedType: 'Cama 1 Plaza Confort', assignedTo: 'Guillermo' },
+            { room: 'Dormitorio 2 (Cama 2)', bedType: 'Cama 1 Plaza Confort', assignedTo: 'Familiar / Acompañante' }
+        ];
+
+        let spOptions = [];
+        let beachOptions = [];
+        let selectedSpIndex = 0;
+        let selectedBeachIndex = 0;
+        let votes = {};
+        let beds = [];
+        let selectedRoute = 'litoral';
+
+        function initApp() {
+            loadState();
+            renderSpOptions();
+            renderBeachOptions();
+            renderBeds();
+            updateCalculator();
+            highlightRouteCard(selectedRoute);
+
+            const savedFb = localStorage.getItem(STORAGE_FEEDBACK);
+            if (savedFb) document.getElementById('family-feedback-text').value = savedFb;
+        }
+
+        function loadState() {
+            try {
+                const sSp = localStorage.getItem(STORAGE_OPTIONS_SP);
+                spOptions = sSp ? JSON.parse(sSp) : defaultSpOptions;
+
+                const sBeach = localStorage.getItem(STORAGE_OPTIONS_BEACH);
+                beachOptions = sBeach ? JSON.parse(sBeach) : defaultBeachOptions;
+
+                const sVotes = localStorage.getItem(STORAGE_VOTES);
+                votes = sVotes ? JSON.parse(sVotes) : {};
+
+                const sBeds = localStorage.getItem(STORAGE_BEDS);
+                beds = sBeds ? JSON.parse(sBeds) : defaultBeds;
+
+                selectedRoute = localStorage.getItem(STORAGE_ROUTE) || 'litoral';
+            } catch (e) {
+                console.error(e);
+                spOptions = defaultSpOptions;
+                beachOptions = defaultBeachOptions;
+                votes = {};
+                beds = defaultBeds;
+                selectedRoute = 'litoral';
+            }
+        }
+
+        function saveAll() {
+            localStorage.setItem(STORAGE_OPTIONS_SP, JSON.stringify(spOptions));
+            localStorage.setItem(STORAGE_OPTIONS_BEACH, JSON.stringify(beachOptions));
+            localStorage.setItem(STORAGE_VOTES, JSON.stringify(votes));
+            localStorage.setItem(STORAGE_BEDS, JSON.stringify(beds));
+            localStorage.setItem(STORAGE_ROUTE, selectedRoute);
+            flashSavedBadge();
+        }
+
+        function flashSavedBadge() {
+            const b = document.getElementById('global-save-badge');
+            if (b) {
+                b.classList.remove('bg-emerald-800/80');
+                b.classList.add('bg-emerald-500', 'text-white');
+                setTimeout(() => {
+                    b.classList.remove('bg-emerald-500', 'text-white');
+                    b.classList.add('bg-emerald-800/80');
+                }, 900);
+            }
+        }
+
+        function selectRoute(routeName) {
+            selectedRoute = routeName;
+            highlightRouteCard(routeName);
+            saveAll();
+        }
+
+        function highlightRouteCard(routeName) {
+            ['litoral', 'sp-total', 'rio-bus'].forEach(r => {
+                const card = document.getElementById(`route-card-${r}`);
+                if (card) {
+                    if (r === routeName) {
+                        card.className = "cursor-pointer bg-white rounded-2xl p-5 border-2 border-emerald-500 shadow-md ring-2 ring-emerald-400/30 space-y-3 relative overflow-hidden";
+                    } else {
+                        card.className = "cursor-pointer bg-white rounded-2xl p-5 border border-slate-200 shadow-sm opacity-80 hover:opacity-100 transition space-y-3 relative overflow-hidden";
+                    }
+                }
+            });
+        }
+
+        function switchCityTab(tabName) {
+            document.getElementById('section-sp').classList.add('hidden');
+            document.getElementById('section-beach').classList.add('hidden');
+            document.getElementById('section-places').classList.add('hidden');
+            document.getElementById('section-calc').classList.add('hidden');
+
+            const btnSp = document.getElementById('tab-btn-sp');
+            const btnBeach = document.getElementById('tab-btn-beach');
+            const btnPlaces = document.getElementById('tab-btn-places');
+            const btnCalc = document.getElementById('tab-btn-calc');
+
+            [btnSp, btnBeach, btnPlaces, btnCalc].forEach(b => {
+                b.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900";
+            });
+
+            if (tabName === 'sp') {
+                document.getElementById('section-sp').classList.remove('hidden');
+                btnSp.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-blue-700 shadow-sm";
+            } else if (tabName === 'beach') {
+                document.getElementById('section-beach').classList.remove('hidden');
+                btnBeach.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-emerald-700 shadow-sm";
+            } else if (tabName === 'places') {
+                document.getElementById('section-places').classList.remove('hidden');
+                btnPlaces.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-purple-700 shadow-sm";
+            } else if (tabName === 'calc') {
+                document.getElementById('section-calc').classList.remove('hidden');
+                btnCalc.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-amber-700 shadow-sm";
+            }
+        }
+
+        // Render São Paulo
+        function renderSpOptions() {
+            const btnContainer = document.getElementById('sp-option-buttons');
+            btnContainer.innerHTML = '';
+            spOptions.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                const isSelected = idx === selectedSpIndex;
+                btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+                    isSelected ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`;
+                btn.innerHTML = `<span>Opción ${idx + 1}</span> ${opt.isRecommended ? '<span class="text-[10px] bg-blue-800 text-blue-100 px-1 rounded">⭐ Top</span>' : ''}`;
+                btn.onclick = () => { selectedSpIndex = idx; renderSpOptions(); };
+                btnContainer.appendChild(btn);
+            });
+
+            const current = spOptions[selectedSpIndex] || spOptions[0];
+            const cardContainer = document.getElementById('sp-card-container');
+            const currentVote = votes[current.id] || null;
+
+            cardContainer.innerHTML = `
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <span class="bg-white/20 text-white text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                                ${current.neighborhood}
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-bold mt-1">${current.title}</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-blue-100">Costo aproximado</span>
+                            <p class="text-2xl font-black">~$${current.price} <span class="text-xs font-medium">USD / noche</span></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-7">
+                        <div class="lg:col-span-5 space-y-3">
+                            <div class="relative rounded-xl overflow-hidden shadow-inner aspect-[4/3] bg-slate-100">
+                                <img src="${current.img}" class="w-full h-full object-cover" alt="Airbnb SP">
+                                <span class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded font-medium">
+                                    <i class="fa-solid fa-elevator text-amber-400 mr-1"></i> ${current.elevator}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <!-- Votación -->
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3">
+                                    <p class="text-xs font-bold text-slate-800">¿Qué opina la familia?</p>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="voteOption('${current.id}', 'love')" class="vote-btn px-3 py-1 rounded-lg border text-xs font-semibold ${currentVote === 'love' ? 'active bg-rose-50 border-rose-300 text-rose-600' : 'bg-white border-slate-200 text-slate-600'}">
+                                            ❤️ Me encanta
+                                        </button>
+                                        <button onclick="voteOption('${current.id}', 'like')" class="vote-btn px-3 py-1 rounded-lg border text-xs font-semibold ${currentVote === 'like' ? 'active bg-emerald-50 border-emerald-300 text-emerald-600' : 'bg-white border-slate-200 text-slate-600'}">
+                                            👍 Buena opción
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2 text-xs">
+                                    <h5 class="font-bold text-slate-700 flex items-center gap-2">
+                                        <i class="fa-solid fa-bed text-blue-600"></i> Distribución de Camas:
+                                    </h5>
+                                    <p class="text-slate-700">${current.beds}</p>
+                                    <p class="text-slate-500"><i class="fa-solid fa-bath text-blue-600"></i> ${current.baths}</p>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-blue-50/80 border border-blue-200 text-blue-900 text-xs space-y-1">
+                                    <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-shield-heart text-blue-700"></i> Accesibilidad:</p>
+                                    <p>${current.mobilityNote}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                                <a href="${current.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow-sm">
+                                    <i class="fa-brands fa-airbnb text-sm"></i>
+                                    <span>Ver en Airbnb</span>
+                                </a>
+                                <button onclick="editAirbnbUrl('sp', ${selectedSpIndex})" class="text-xs text-slate-500 hover:text-slate-800 underline">
+                                    Editar Link de Airbnb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Playa Santos
+        function renderBeachOptions() {
+            const btnContainer = document.getElementById('beach-option-buttons');
+            btnContainer.innerHTML = '';
+            beachOptions.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                const isSelected = idx === selectedBeachIndex;
+                btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+                    isSelected ? 'bg-emerald-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`;
+                btn.innerHTML = `<span>Opción ${idx + 1}</span> ${opt.isRecommended ? '<span class="text-[10px] bg-emerald-800 text-emerald-100 px-1 rounded">⭐ Top</span>' : ''}`;
+                btn.onclick = () => { selectedBeachIndex = idx; renderBeachOptions(); };
+                btnContainer.appendChild(btn);
+            });
+
+            const current = beachOptions[selectedBeachIndex] || beachOptions[0];
+            const cardContainer = document.getElementById('beach-card-container');
+            const currentVote = votes[current.id] || null;
+
+            cardContainer.innerHTML = `
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden">
+                    <div class="bg-gradient-to-r from-emerald-600 to-teal-700 text-white p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <span class="bg-white/20 text-white text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                                ${current.neighborhood}
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-bold mt-1">${current.title}</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-emerald-100">Costo aproximado</span>
+                            <p class="text-2xl font-black">~$${current.price} <span class="text-xs font-medium">USD / noche</span></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-7">
+                        <div class="lg:col-span-5 space-y-3">
+                            <div class="relative rounded-xl overflow-hidden shadow-inner aspect-[4/3] bg-slate-100">
+                                <img src="${current.img}" class="w-full h-full object-cover" alt="Airbnb Playa">
+                                <span class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded font-medium">
+                                    <i class="fa-solid fa-elevator text-amber-400 mr-1"></i> ${current.elevator}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <!-- Votación -->
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3">
+                                    <p class="text-xs font-bold text-slate-800">¿Qué opina la familia?</p>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="voteOption('${current.id}', 'love')" class="vote-btn px-3 py-1 rounded-lg border text-xs font-semibold ${currentVote === 'love' ? 'active bg-rose-50 border-rose-300 text-rose-600' : 'bg-white border-slate-200 text-slate-600'}">
+                                            ❤️ Me encanta
+                                        </button>
+                                        <button onclick="voteOption('${current.id}', 'like')" class="vote-btn px-3 py-1 rounded-lg border text-xs font-semibold ${currentVote === 'like' ? 'active bg-emerald-50 border-emerald-300 text-emerald-600' : 'bg-white border-slate-200 text-slate-600'}">
+                                            👍 Buena opción
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2 text-xs">
+                                    <h5 class="font-bold text-slate-700 flex items-center gap-2">
+                                        <i class="fa-solid fa-bed text-emerald-600"></i> Distribución de Camas:
+                                    </h5>
+                                    <p class="text-slate-700">${current.beds}</p>
+                                    <p class="text-slate-500"><i class="fa-solid fa-bath text-cyan-600"></i> ${current.baths}</p>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-teal-50/80 border border-teal-200 text-teal-900 text-xs space-y-1">
+                                    <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-shield-heart text-teal-700"></i> Accesibilidad:</p>
+                                    <p>${current.mobilityNote}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                                <a href="${current.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow-sm">
+                                    <i class="fa-brands fa-airbnb text-sm"></i>
+                                    <span>Ver en Airbnb</span>
+                                </a>
+                                <button onclick="editAirbnbUrl('beach', ${selectedBeachIndex})" class="text-xs text-slate-500 hover:text-slate-800 underline">
+                                    Editar Link de Airbnb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Camas
+        function renderBeds() {
+            const container = document.getElementById('bed-assignment-list');
+            container.innerHTML = '';
+            beds.forEach((bed, index) => {
+                const div = document.createElement('div');
+                div.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between gap-3';
+                div.innerHTML = `
+                    <div class="space-y-0.5">
+                        <p class="font-bold text-xs text-slate-800">${bed.room}</p>
+                        <p class="text-[11px] text-slate-500">${bed.bedType}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] text-slate-400">Duerme:</span>
+                        <input type="text" value="${bed.assignedTo}" onchange="updateBedAssign(${index}, this.value)" class="text-xs font-semibold px-2.5 py-1 rounded-lg border border-slate-200 bg-white text-slate-800 w-36">
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateBedAssign(idx, val) {
+            beds[idx].assignedTo = val.trim();
+            saveAll();
+        }
+
+        function saveBeds() {
+            saveAll();
+            alert("¡Camas guardadas correctamente!");
+        }
+
+        // Calculadora
+        function updateCalculator() {
+            const night = parseInt(document.getElementById('calc-night').value) || 85;
+            const cleaning = parseInt(document.getElementById('calc-cleaning').value) || 60;
+            const people = parseInt(document.getElementById('calc-people').value) || 4;
+
+            document.getElementById('calc-night-val').innerText = `$${night} / noche (6 noches = $${night * 6})`;
+            const total = (night * 6) + cleaning;
+            const perPerson = Math.round(total / people);
+
+            document.getElementById('calc-total-usd').innerText = `$${total} USD`;
+            document.getElementById('calc-per-person').innerText = `Solo ~$${perPerson} USD por persona (${people} viajeros)`;
+        }
+
+        // Votar
+        function voteOption(id, type) {
+            votes[id] = (votes[id] === type) ? null : type;
+            saveAll();
+            renderSpOptions();
+            renderBeachOptions();
+        }
+
+        function editAirbnbUrl(cat, idx) {
+            const list = cat === 'sp' ? spOptions : beachOptions;
+            const newUrl = prompt("Pega aquí el enlace de Airbnb:", list[idx].url);
+            if (newUrl && newUrl.trim() !== "") {
+                list[idx].url = newUrl.trim();
+                saveAll();
+                if (cat === 'sp') renderSpOptions();
+                else renderBeachOptions();
+            }
+        }
+
+        function openNewAirbnbModal() {
+            document.getElementById('new-airbnb-modal').classList.remove('hidden');
+        }
+        function closeNewAirbnbModal() {
+            document.getElementById('new-airbnb-modal').classList.add('hidden');
+        }
+
+        function saveNewAirbnb(e) {
+            e.preventDefault();
+            const city = document.getElementById('modal-city').value;
+            const title = document.getElementById('modal-title').value.trim();
+            const neighborhood = document.getElementById('modal-neighborhood').value.trim();
+            const price = parseInt(document.getElementById('modal-price').value) || 80;
+            const elevator = document.getElementById('modal-elevator').value;
+            const url = document.getElementById('modal-url').value.trim();
+            const bedsText = document.getElementById('modal-beds').value.trim() || '2 dormitorios confortables.';
+
+            const newObj = {
+                id: `${city}-${Date.now()}`,
+                title, neighborhood, price, elevator, url,
+                img: city === 'sp' ? 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80' : 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
+                thumbs: [],
+                beds: bedsText,
+                baths: '2 Baños',
+                mobilityNote: 'Opción agregada para evaluación familiar.',
+                isRecommended: false
+            };
+
+            if (city === 'sp') {
+                spOptions.push(newObj);
+                selectedSpIndex = spOptions.length - 1;
+                switchCityTab('sp');
+                renderSpOptions();
+            } else {
+                beachOptions.push(newObj);
+                selectedBeachIndex = beachOptions.length - 1;
+                switchCityTab('beach');
+                renderBeachOptions();
+            }
+            saveAll();
+            closeNewAirbnbModal();
+            document.getElementById('new-airbnb-form').reset();
+            alert("¡Airbnb añadido exitosamente!");
+        }
+
+        function saveFeedback() {
+            const txt = document.getElementById('family-feedback-text').value.trim();
+            localStorage.setItem(STORAGE_FEEDBACK, txt);
+            const status = document.getElementById('feedback-save-status');
+            status.innerText = "¡Guardado! ✓";
+            setTimeout(() => status.innerText = "", 1500);
+        }
+
+        function exportFamilySummary() {
+            const sp = spOptions[selectedSpIndex] || spOptions[0];
+            const beach = beachOptions[selectedBeachIndex] || beachOptions[0];
+            const note = document.getElementById('family-feedback-text').value.trim();
+
+            let txt = `🇧🇷 *PLAN FAMILIAR BRASIL 2026 (ACTUALIZADO)*\n\n`;
+            txt += `⚡ *Decisión:* Cancelamos vuelos internos caros a Río (Ahorro: ~$700 USD).\n\n`;
+            txt += `📍 *Opción SP:* ${sp.title}\nZona: ${sp.neighborhood} (~$${sp.price}/noche)\nLink: ${sp.url}\n\n`;
+            txt += `📍 *Opción Playa Santos:* ${beach.title}\nZona: ${beach.neighborhood} (~$${beach.price}/noche)\nLink: ${beach.url}\n\n`;
+            if (note) txt += `💬 *Comentario:* "${note}"\n`;
+
+            navigator.clipboard.writeText(txt).then(() => {
+                alert("¡Resumen copiado! Listo para pegar en WhatsApp.");
+            });
+        }
+
+        function shareWhatsAppFull() {
+            saveFeedback();
+            const sp = spOptions[selectedSpIndex] || spOptions[0];
+            const beach = beachOptions[selectedBeachIndex] || beachOptions[0];
+            const note = document.getElementById('family-feedback-text').value.trim();
+
+            let txt = `¡Hola familia! 🌴🇧🇷 Ya vi la actualización del viaje (sin vuelos caros a Río):\n\n`;
+            txt += `🏙️ *SP:* ${sp.title} (~$${sp.price}/noche)\n`;
+            txt += `🏖️ *Playa:* ${beach.title} (~$${beach.price}/noche)\n`;
+            if (note) txt += `\n💬 *Mi voto/comentario:* "${note}"\n`;
+            txt += `\n¡Miren las fotos y voten aquí!: https://luistaparazuniga-star.github.io/viaje-brasil-2026/hospedaje.html`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
