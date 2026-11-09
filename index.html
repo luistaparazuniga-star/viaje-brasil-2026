@@ -86,7 +86,8 @@
                             <th class="p-3.5 w-24">Fecha</th>
                             <th class="p-3.5 w-36">Ciudad</th>
                             <th class="p-3.5">Actividades Principales</th>
-                            <th class="p-3.5 w-72">Ajuste de Movilidad</th>
+                            <th class="p-3.5 w-64">Ajuste de Movilidad</th>
+                            <th class="p-3.5 w-44">Ticket / Reserva</th>
                             <th class="p-3.5 w-12 text-center no-print">Acción</th>
                         </tr>
                     </thead>
@@ -133,16 +134,65 @@
     </div>
 
     <script>
-        const STORAGE_KEY = 'brasil_2026_itinerary_v2';
+        const STORAGE_KEY = 'brasil_2026_table_v3';
 
         const defaultData = [
-            { date: "12 Nov", city: "São Paulo", activity: "Aterrizaje en GRU (18:10). Uber al hospedaje en Jardins / Paulista. Cena ligera.", mobility: "Cero esfuerzo físico. Ascensor directo y reposo tras el vuelo." },
-            { date: "13 Nov", city: "São Paulo", activity: "Av. Paulista, MASP y Mirador Sesc (Piso 17). Parque Ibirapuera. A las 23:30 Bus Leito Cama 180° a Río.", mobility: "Sesc con ascensores rápidos. En la noche se viaja acostado 180° durmiendo cómodamente." },
-            { date: "14 Nov", city: "Río de Janeiro", activity: "Llegada a las 06:00 a Río. Check-in en Copacabana. Tarde y atardecer en quioscos de la playa.", mobility: "Caminar exclusivamente por el calçadão pavimentado, evitando la arena blanda." },
-            { date: "15 Nov", city: "Río de Janeiro", activity: "¡CRISTO REDENTOR! Subida en Trem do Corcovado. Tarde relajada en Jardín Botánico.", mobility: "3 ascensores panorámicos y 4 escaleras mecánicas arriba. ¡CERO escaleras a pie! Senderos planos en botánico." },
-            { date: "16 Nov", city: "Río -> SP", activity: "Pan de Azúcar en teleférico. Tarde en Copacabana. A las 23:00 Bus Leito Cama durmiendo a SP.", mobility: "Teleférico 100% accesible con rampas. Viaje nocturno durmiendo sin fatiga de espalda." },
-            { date: "17 Nov", city: "São Paulo", activity: "Barrio Japonés Liberdade (tiendas y gastronomía). Tarde y cena especial familiar en Jardins.", mobility: "Bajar del Uber en la parte alta de Galvão Bueno para caminar en bajada suave sin esfuerzo." },
-            { date: "18 Nov", city: "São Paulo", activity: "Mercado Municipal (almuerzo en Mezanino). Salida a GRU a las 15:00 para vuelo a AQP (19:10).", mobility: "En el mercado, subir directo en ascensor al segundo piso para comer sentados con tranquilidad." }
+            { 
+                date: "12 Nov", 
+                city: "São Paulo", 
+                activity: "Aterrizaje en GRU (18:10). Uber al hospedaje en Jardins / Paulista. Cena ligera.", 
+                mobility: "Cero esfuerzo físico. Ascensor directo y reposo tras el vuelo.",
+                ticketUrl: "",
+                ticketLabel: "Vuelo AQP ➔ GRU"
+            },
+            { 
+                date: "13 Nov", 
+                city: "São Paulo", 
+                activity: "Av. Paulista, MASP y Mirador Sesc (Piso 17). Parque Ibirapuera. A las 23:30 Bus Leito Cama 180° a Río.", 
+                mobility: "Sesc con ascensores rápidos. En la noche se viaja acostado 180° durmiendo cómodamente.",
+                ticketUrl: "https://www.autoviacao1001.com.br",
+                ticketLabel: "Bus Leito SP ➔ Río"
+            },
+            { 
+                date: "14 Nov", 
+                city: "Río de Janeiro", 
+                activity: "Llegada a las 06:00 a Río. Check-in en Copacabana. Tarde y atardecer en quioscos de la playa.", 
+                mobility: "Caminar exclusivamente por el calçadão pavimentado, evitando la arena blanda.",
+                ticketUrl: "https://www.airbnb.com",
+                ticketLabel: "Airbnb Copacabana"
+            },
+            { 
+                date: "15 Nov", 
+                city: "Río de Janeiro", 
+                activity: "¡CRISTO REDENTOR! Subida en Trem do Corcovado. Tarde relajada en Jardín Botánico.", 
+                mobility: "3 ascensores panorámicos y 4 escaleras mecánicas arriba. ¡CERO escaleras a pie! Senderos planos en botánico.",
+                ticketUrl: "https://www.tremdocorcovado.rio",
+                ticketLabel: "Tickets Trem do Corcovado"
+            },
+            { 
+                date: "16 Nov", 
+                city: "Río -> SP", 
+                activity: "Pan de Azúcar en teleférico. Tarde en Copacabana. A las 23:00 Bus Leito Cama durmiendo a SP.", 
+                mobility: "Teleférico 100% accesible con rampas. Viaje nocturno durmiendo sin fatiga de espalda.",
+                ticketUrl: "https://bondinho.com.br",
+                ticketLabel: "Tickets Pan de Azúcar"
+            },
+            { 
+                date: "17 Nov", 
+                city: "São Paulo", 
+                activity: "Barrio Japonés Liberdade (tiendas y gastronomía). Tarde y cena especial familiar en Jardins.", 
+                mobility: "Bajar del Uber en la parte alta de Galvão Bueno para caminar en bajada suave sin esfuerzo.",
+                ticketUrl: "",
+                ticketLabel: "Cena Despedida Jardins"
+            },
+            { 
+                date: "18 Nov", 
+                city: "São Paulo", 
+                activity: "Mercado Municipal (almuerzo en Mezanino). Salida a GRU a las 15:00 para vuelo a AQP (19:10).", 
+                mobility: "En el mercado, subir directo en ascensor al segundo piso para comer sentados con tranquilidad.",
+                ticketUrl: "",
+                ticketLabel: "Vuelo GRU ➔ AQP"
+            }
         ];
 
         let itineraryData = [];
@@ -201,6 +251,25 @@
                 const tr = document.createElement('tr');
                 tr.className = 'hover:bg-slate-50/80 transition group';
 
+                const hasTicket = row.ticketUrl && row.ticketUrl.trim() !== "";
+                const ticketCell = hasTicket ? `
+                    <div class="space-y-1">
+                        <a href="${escapeHtml(row.ticketUrl)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition">
+                            <i class="fa-solid fa-ticket text-[10px]"></i>
+                            <span>${escapeHtml(row.ticketLabel || 'Ver Ticket')}</span>
+                        </a>
+                        <div>
+                            <button onclick="editTicket(${index})" class="text-[11px] text-slate-400 hover:text-slate-700 underline decoration-slate-300">
+                                Editar Link
+                            </button>
+                        </div>
+                    </div>
+                ` : `
+                    <button onclick="editTicket(${index})" class="inline-flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 border border-dashed border-blue-300 px-2 py-1 rounded bg-blue-50/50 hover:bg-blue-100 transition">
+                        <i class="fa-solid fa-plus text-[10px]"></i> Ticket / Link
+                    </button>
+                `;
+
                 tr.innerHTML = `
                     <td class="p-3.5 font-semibold text-slate-700 align-top">
                         <div contenteditable="true" onblur="updateCell(${index}, 'date', this.innerText)" class="px-2 py-1">${escapeHtml(row.date)}</div>
@@ -217,6 +286,9 @@
                     </td>
                     <td class="p-3.5 text-slate-600 align-top leading-relaxed bg-amber-50/30">
                         <div contenteditable="true" onblur="updateCell(${index}, 'mobility', this.innerText)" class="px-2 py-1">${escapeHtml(row.mobility)}</div>
+                    </td>
+                    <td class="p-3.5 align-top">
+                        ${ticketCell}
                     </td>
                     <td class="p-3.5 align-top text-center no-print">
                         <button onclick="removeRow(${index})" title="Eliminar fila" class="opacity-0 group-hover:opacity-100 text-rose-400 hover:text-rose-600 p-1.5 rounded transition">
@@ -243,6 +315,63 @@
                 renderTable();
             }
         }
+
+        function editTicket(index) {
+            const current = itineraryData[index];
+            if (!current) return;
+
+            const newUrl = prompt("Pega el enlace web del ticket, pasaje o reserva (URL):", current.ticketUrl || "");
+            if (newUrl === null) return;
+
+            const newLabel = prompt("Nombre o etiqueta del ticket (ej: Tickets Trem do Corcovado, Boleto Bus, etc.):", current.ticketLabel || "Ver Ticket");
+
+            current.ticketUrl = newUrl.trim();
+            current.ticketLabel = (newLabel && newLabel.trim() !== "") ? newLabel.trim() : "Ver Ticket";
+            saveData();
+            renderTable();
+        }
+
+        function addRow() {
+            itineraryData.push({
+                date: "Nuevo Día",
+                city: "Destino",
+                activity: "Describe las actividades programadas...",
+                mobility: "Recomendaciones o descansos requeridos.",
+                ticketUrl: "",
+                ticketLabel: "Agregar Ticket"
+            });
+            saveData();
+            renderTable();
+        }
+
+        function removeRow(index) {
+            if (confirm("¿Estás seguro de eliminar este día del itinerario?")) {
+                itineraryData.splice(index, 1);
+                saveData();
+                renderTable();
+            }
+        }
+
+        function resetData() {
+            if (confirm("¿Restaurar el itinerario original? Se perderán las modificaciones locales.")) {
+                itineraryData = JSON.parse(JSON.stringify(defaultData));
+                saveData();
+                renderTable();
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', loadData);
 
         function addRow() {
             itineraryData.push({

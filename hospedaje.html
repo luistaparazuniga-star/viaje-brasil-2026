@@ -246,201 +246,24 @@
                     </div>
                 </div>
 
-                <!-- Timeline Cards Día por Día -->
-                <div class="space-y-4">
-                    <!-- Día 1 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-blue-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
-                                    <span>12</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 1: Miércoles &bull; Llegada a Brasil & Reposo</h4>
-                                    <span class="text-xs text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded">São Paulo &bull; Hospedaje en Jardins / Paulista</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-slate-200/80 text-slate-700 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-plane-arrival mr-1 text-blue-600"></i> Aterrizaje 18:10 (GRU)
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            Llegada al Aeropuerto de Guarulhos (GRU). Traslado directo en Uber Comfort o Black al Airbnb en Jardins / Paulista (45-60 min). Check-in asistido sin escaleras, cena ligera en el departamento y descanso absoluto para reponer energías.
-                        </p>
-                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200/60 text-[11px] text-amber-900 flex items-center gap-2">
-                            <i class="fa-solid fa-shield-heart text-amber-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Cero esfuerzo físico tras el vuelo internacional. Uso exclusivo de ascensor y descanso en cama confortable.</span>
-                        </div>
+                <div class="flex flex-wrap items-center justify-between gap-2 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs">
+                    <div class="flex items-center gap-2 text-slate-600">
+                        <i class="fa-solid fa-pen-to-square text-blue-600"></i>
+                        <span>Haz clic sobre cualquier texto (título, actividades, notas) para editarlo. Se guarda automáticamente.</span>
                     </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="addItineraryDay()" class="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold shadow-sm flex items-center gap-1.5 transition">
+                            <i class="fa-solid fa-plus"></i> Añadir Día
+                        </button>
+                        <button onclick="resetItineraryDays()" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg font-semibold flex items-center gap-1.5 transition">
+                            <i class="fa-solid fa-rotate-left"></i> Restaurar Original
+                        </button>
+                    </div>
+                </div>
 
-                    <!-- Día 2 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
-                                    <span>13</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 2: Jueves &bull; São Paulo Cultural ➔ Bus Leito Cama a Río (Noche)</h4>
-                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">São Paulo &bull; Mirador SESC & Parque Ibirapuera</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-purple-100 text-purple-900 font-bold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-bed mr-1"></i> Bus Leito 180° (Ahorro de Vuelo)
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Día en SP:</strong> Paseo suave por Av. Paulista, vista al MASP y subida al Mirador SESC (Piso 17, ascensor panorámico). Tarde relajada en el Parque Ibirapuera junto al lago.<br>
-                            <strong>Noche (23:30):</strong> Uber al Terminal Tietê para abordar el <strong>Bus Leito Cama 180°</strong> hacia Río de Janeiro. Se viaja totalmente acostado, con aire acondicionado, frazada y almohada. <em>Ahorramos cientos de dólares de avión y 1 noche de hotel.</em>
-                        </p>
-                        <div class="p-3 bg-purple-50 rounded-xl border border-purple-200/60 text-[11px] text-purple-900 flex items-center gap-2">
-                            <i class="fa-solid fa-shield-heart text-purple-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> El asiento Leito se reclina a 180° plano. Permite dormir toda la noche descansando la espalda sin la compresión de un avión estrecho.</span>
-                        </div>
-                    </div>
-
-                    <!-- Día 3 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-cyan-50/60 border border-cyan-200/90 hover:border-cyan-400 transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-cyan-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
-                                    <span>14</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 3: Viernes &bull; Llegada a Río de Janeiro & Tarde en Copacabana</h4>
-                                    <span class="text-xs text-cyan-800 font-semibold bg-cyan-100 px-2 py-0.5 rounded">Río de Janeiro &bull; Check-in & Brisa Marina</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-cyan-200/80 text-cyan-900 font-bold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-water mr-1"></i> Copacabana
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana (06:00):</strong> Llegada al Terminal Novo Río. Uber directo de 15 minutos al Airbnb en Copacabana (Posto 4-5). Check-in / custodia de equipaje, ducha caliente y desayuno relajado.<br>
-                            <strong>Tarde:</strong> Paseo tranquilo por el calçadão (vereda pavimentada) de Copacabana, atardecer y agua de coco fría en quioscos frente al mar sin pisar arena blanda.
-                        </p>
-                        <div class="p-3 bg-cyan-100/70 rounded-xl border border-cyan-300 text-[11px] text-cyan-900 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-cyan-700 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Tarde relajada para aclimatar el cuerpo y descansar bien para la subida al Cristo al día siguiente.</span>
-                        </div>
-                    </div>
-
-                    <!-- Día 4: EL CRISTO REDENTOR -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/80 border-2 border-amber-400 hover:border-amber-500 shadow-md transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-amber-500 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-md">
-                                    <span>15</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 4: Sábado &bull; ¡Ascenso al Cristo Redentor (Corcovado)! ⛪</h4>
-                                    <span class="text-xs text-amber-900 font-bold bg-amber-200/80 px-2.5 py-0.5 rounded">Río de Janeiro &bull; Maravilla del Mundo</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-amber-200 text-amber-900 font-black px-3 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
-                                <i class="fa-solid fa-train"></i> Trem do Corcovado + Ascensores
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">
-                            <strong>Mañana (08:00):</strong> Uber a la Estación Cosme Velho. Subida en el histórico <strong>Trem do Corcovado</strong> (20 min) a través de la Floresta da Tijuca. Al llegar arriba, usamos los <strong>3 ascensores panorámicos y 4 escaleras mecánicas</strong> para llegar directamente a los pies del Cristo <em>(¡Cero escaleras a pie!)</em>. Vistas de 360° de toda la ciudad.<br>
-                            <strong>Tarde:</strong> Almuerzo y visita relajada al <strong>Jardín Botánico</strong> (senderos completamente planos y sombreados por palmeras gigantes).
-                        </p>
-                        <div class="p-3 bg-white rounded-xl border border-amber-300 text-[11px] text-amber-950 flex items-center justify-between gap-2">
-                            <span class="flex items-center gap-2">
-                                <i class="fa-solid fa-ticket text-amber-600 text-base"></i>
-                                <span><strong>Costo Entrada + Tren:</strong> ~R$ 134 - 139 BRL (~$25 USD) adultos &bull; R$ 107 BRL niños &bull; Menores de 6 gratis.</span>
-                            </span>
-                            <button onclick="switchCityTab('cristo')" class="text-xs font-bold text-blue-700 hover:underline shrink-0">
-                                Ver Guía Detallada &rarr;
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Día 5 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
-                                    <span>16</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 5: Domingo &bull; Pan de Azúcar (Teleférico) ➔ Retorno a SP (Noche)</h4>
-                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Río de Janeiro ➔ São Paulo en Bus Leito</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-indigo-100 text-indigo-800 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-cable-car mr-1"></i> Teleférico 100% Accesible
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana:</strong> Teleférico del Pan de Azúcar (Bondinho) en Urca. Rampas y ascensores en cada estación, vistas maravillosas de la bahía y cafetería con terraza.<br>
-                            <strong>Tarde / Noche:</strong> Almuerzo marinero y tarde de descanso en Copacabana. A las 23:00, abordamos el <strong>Bus Leito Cama</strong> de retorno para dormir cómodamente mientras viajamos de vuelta a São Paulo.
-                        </p>
-                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
-                            <i class="fa-solid fa-bed text-blue-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Llegamos a São Paulo descansados al amanecer habiendo ahorrado otra noche de hotel.</span>
-                        </div>
-                    </div>
-
-                    <!-- Día 6 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-rose-300 transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-rose-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
-                                    <span>17</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 6: Lunes &bull; Barrio Japonés de Liberdade & Cena de Despedida</h4>
-                                    <span class="text-xs text-rose-700 font-semibold bg-rose-50 px-2 py-0.5 rounded">São Paulo &bull; Cultura Asiática & Recuerdos</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-rose-100 text-rose-800 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-bag-shopping mr-1"></i> Compras & Gastronomía
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana / Tarde:</strong> Visita al Barrio Japonés Liberdade (el más grande fuera de Japón). Faroles rojos tradicionales, tiendas de souvenirs, cosmética y pastelería oriental.<br>
-                            <strong>Tarde / Noche:</strong> Café en jardín zen y cena especial de despedida familiar en un restaurante emblemático de Jardins.
-                        </p>
-                        <div class="p-3 bg-rose-50 rounded-xl border border-rose-200/60 text-[11px] text-rose-900 flex items-center gap-2">
-                            <i class="fa-solid fa-person-walking text-rose-600 text-sm shrink-0"></i>
-                            <span><strong>Técnica de Movilidad Clave:</strong> El Uber nos dejará en la parte ALTA de la calle Galvão Bueno para hacer todo el recorrido en pendiente de bajada sin fatigarse.</span>
-                        </div>
-                    </div>
-
-                    <!-- Día 7 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-blue-400 transition space-y-3">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-blue-700 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
-                                    <span>18</span>
-                                    <span class="text-[9px] font-normal uppercase">Nov</span>
-                                </span>
-                                <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 7: Martes &bull; Mercado Municipal (Mezanino) & Vuelo de Retorno</h4>
-                                    <span class="text-xs text-blue-800 font-semibold bg-blue-50 px-2 py-0.5 rounded">São Paulo ➔ Arequipa &bull; Despedida de Brasil</span>
-                                </div>
-                            </div>
-                            <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-plane-departure mr-1"></i> Vuelo Retorno 19:10
-                            </span>
-                        </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana:</strong> Check-out y custodia de maletas. Visita al histórico Mercado Municipal ("Mercadão") con sus vitrales de colores.<br>
-                            <strong>Almuerzo:</strong> Subida en ascensor directo al segundo piso (*Mezanino*) para degustar el legendario sándwich artesanal y pastel de bacalao con servicio a la mesa.<br>
-                            <strong>Tarde:</strong> A las 15:00 salida con suficiente margen hacia GRU en Uber para el vuelo internacional de retorno (19:10).
-                        </p>
-                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
-                            <i class="fa-solid fa-wheelchair text-blue-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Salida a GRU con 4 horas de margen para evitar prisas y solicitar asistencia con carrito/silla en mostrador.</span>
-                        </div>
-                    </div>
+                <!-- Timeline Cards Día por Día (100% Dinámico & Editable) -->
+                <div id="itinerary-cards-container" class="space-y-4">
+                    <!-- Inyectado por JavaScript -->
                 </div>
             </div>
         </section>
@@ -929,10 +752,106 @@
     <script>
         const STORAGE_OPTIONS_SP    = 'brasil_2026_sp_v2';
         const STORAGE_OPTIONS_RIO   = 'brasil_2026_rio_v2';
+        const STORAGE_DAYS          = 'brasil_2026_itinerary_days_v4';
         const STORAGE_VOTES         = 'brasil_2026_votes_v2';
         const STORAGE_BEDS          = 'brasil_2026_beds_v2';
         const STORAGE_FEEDBACK      = 'brasil_2026_feedback_v2';
         const STORAGE_ROUTE         = 'brasil_2026_route_v2';
+
+        // Días por defecto del Itinerario
+        const defaultItineraryDays = [
+            {
+                dayNum: "12",
+                month: "Nov",
+                title: "Día 1: Miércoles • Llegada a Brasil & Reposo",
+                city: "São Paulo • Hospedaje en Jardins / Paulista",
+                badge: "Aterrizaje 18:10 (GRU)",
+                badgeIcon: "fa-plane-arrival",
+                badgeColor: "bg-slate-200 text-slate-700",
+                description: "Llegada al Aeropuerto de Guarulhos (GRU). Traslado directo en Uber Comfort o Black al Airbnb en Jardins / Paulista (45-60 min). Check-in asistido sin escaleras, cena ligera en el departamento y descanso absoluto para reponer energías.",
+                mobility: "Criterio de Salud: Cero esfuerzo físico tras el vuelo internacional. Uso exclusivo de ascensor y descanso en cama confortable.",
+                ticketUrl: "",
+                ticketLabel: "Vuelo AQP ➔ GRU"
+            },
+            {
+                dayNum: "13",
+                month: "Nov",
+                title: "Día 2: Jueves • São Paulo Cultural ➔ Bus Leito Cama a Río (Noche)",
+                city: "São Paulo • Mirador SESC & Parque Ibirapuera",
+                badge: "Bus Leito 180° (Ahorro de Vuelo)",
+                badgeIcon: "fa-bed",
+                badgeColor: "bg-purple-100 text-purple-900",
+                description: "Día en SP: Paseo suave por Av. Paulista, vista al MASP y subida al Mirador SESC (Piso 17, ascensor panorámico). Tarde relajada en el Parque Ibirapuera junto al lago. Noche (23:30): Uber al Terminal Tietê para abordar el Bus Leito Cama 180° hacia Río de Janeiro. Se viaja totalmente acostado, con aire acondicionado, frazada y almohada. Ahorramos cientos de dólares de avión y 1 noche de hotel.",
+                mobility: "Criterio de Salud: El asiento Leito se reclina a 180° plano. Permite dormir toda la noche descansando la espalda sin la fatiga de un avión estrecho.",
+                ticketUrl: "https://www.autoviacao1001.com.br",
+                ticketLabel: "Boleto Bus Leito SP ➔ Río"
+            },
+            {
+                dayNum: "14",
+                month: "Nov",
+                title: "Día 3: Viernes • Llegada a Río de Janeiro & Tarde en Copacabana",
+                city: "Río de Janeiro • Check-in & Brisa Marina",
+                badge: "Copacabana Posto 4-5",
+                badgeIcon: "fa-water",
+                badgeColor: "bg-cyan-200 text-cyan-900",
+                description: "Mañana (06:00): Llegada al Terminal Novo Río. Uber directo de 15 minutos al Airbnb en Copacabana (Posto 4-5). Check-in / custodia de equipaje, ducha caliente y desayuno relajado. Tarde: Paseo tranquilo por el calçadão (vereda pavimentada) de Copacabana, atardecer y agua de coco fría en quioscos frente al mar sin pisar arena blanda.",
+                mobility: "Criterio de Salud: Tarde relajada para aclimatar el cuerpo y descansar bien para la subida al Cristo al día siguiente.",
+                ticketUrl: "https://www.airbnb.com",
+                ticketLabel: "Reserva Airbnb Copacabana"
+            },
+            {
+                dayNum: "15",
+                month: "Nov",
+                title: "Día 4: Sábado • ¡Ascenso al Cristo Redentor (Corcovado)! ⛪",
+                city: "Río de Janeiro • Maravilla del Mundo",
+                badge: "Trem do Corcovado + Ascensores",
+                badgeIcon: "fa-train",
+                badgeColor: "bg-amber-200 text-amber-900",
+                description: "Mañana (08:00): Uber a la Estación Cosme Velho. Subida en el histórico Trem do Corcovado (20 min) a través de la Floresta da Tijuca. Al llegar arriba, usamos los 3 ascensores panorámicos y 4 escaleras mecánicas para llegar directamente a los pies del Cristo (¡Cero escaleras a pie!). Vistas de 360° de toda la ciudad. Tarde: Almuerzo y visita relajada al Jardín Botánico (senderos completamente planos y sombreados por palmeras gigantes).",
+                mobility: "Criterio de Salud: Cero escaleras a pie en el Corcovado. Uso exclusivo de los ascensores y escaleras mecánicas en la cima.",
+                ticketUrl: "https://www.tremdocorcovado.rio",
+                ticketLabel: "Entradas Oficiales Cristo Redentor"
+            },
+            {
+                dayNum: "16",
+                month: "Nov",
+                title: "Día 5: Domingo • Pan de Azúcar (Teleférico) ➔ Retorno a SP (Noche)",
+                city: "Río de Janeiro ➔ São Paulo en Bus Leito",
+                badge: "Teleférico 100% Accesible",
+                badgeIcon: "fa-cable-car",
+                badgeColor: "bg-indigo-100 text-indigo-800",
+                description: "Mañana: Teleférico del Pan de Azúcar (Bondinho) en Urca. Rampas y ascensores en cada estación, vistas maravillosas de la bahía y cafetería con terraza. Tarde / Noche: Almuerzo marinero y tarde de descanso en Copacabana. A las 23:00, abordamos el Bus Leito Cama de retorno para dormir cómodamente mientras viajamos de vuelta a São Paulo.",
+                mobility: "Criterio de Salud: Llegamos a São Paulo descansados al amanecer habiendo ahorrado otra noche de hotel.",
+                ticketUrl: "https://bondinho.com.br",
+                ticketLabel: "Tickets Pan de Azúcar"
+            },
+            {
+                dayNum: "17",
+                month: "Nov",
+                title: "Día 6: Lunes • Barrio Japonés de Liberdade & Cena de Despedida",
+                city: "São Paulo • Cultura Asiática & Recuerdos",
+                badge: "Compras & Gastronomía",
+                badgeIcon: "fa-bag-shopping",
+                badgeColor: "bg-rose-100 text-rose-800",
+                description: "Mañana / Tarde: Visita al Barrio Japonés Liberdade (el más grande fuera de Japón). Faroles rojos tradicionales, tiendas de souvenirs, cosmética y pastelería oriental. Tarde / Noche: Café en jardín zen y cena especial de despedida familiar en un restaurante emblemático de Jardins.",
+                mobility: "Técnica de Movilidad Clave: El Uber nos dejará en la parte ALTA de la calle Galvão Bueno para hacer todo el recorrido en pendiente de bajada sin fatigarse.",
+                ticketUrl: "",
+                ticketLabel: "Reserva Restaurante Jardins"
+            },
+            {
+                dayNum: "18",
+                month: "Nov",
+                title: "Día 7: Martes • Mercado Municipal (Mezanino) & Vuelo de Retorno",
+                city: "São Paulo ➔ Arequipa • Despedida de Brasil",
+                badge: "Vuelo Retorno 19:10",
+                badgeIcon: "fa-plane-departure",
+                badgeColor: "bg-blue-100 text-blue-800",
+                description: "Mañana: Check-out y custodia de maletas. Visita al histórico Mercado Municipal ('Mercadão') con sus vitrales de colores. Almuerzo: Subida en ascensor directo al segundo piso (Mezanino) para degustar el legendario sándwich artesanal o pastel de bacalao con servicio a la mesa. Tarde: A las 15:00 salida con suficiente margen hacia GRU en Uber para el vuelo internacional de retorno (19:10).",
+                mobility: "Criterio de Salud: Salida a GRU con 4 horas de margen para evitar prisas y solicitar asistencia con carrito/silla en mostrador.",
+                ticketUrl: "",
+                ticketLabel: "Vuelo GRU ➔ AQP"
+            }
+        ];
 
         // Opciones por defecto São Paulo
         const defaultSpOptions = [
@@ -1007,26 +926,6 @@
                 isRecommended: false
             }
         ];
-                mobilityNote: 'Cruzas la calle y estás en la vereda de mosaico con sombra y quioscos.',
-                isRecommended: true
-            },
-            {
-                id: 'beach-2',
-                title: 'Opción 2: Condominio Cerrado en Guarujá (Pitangueiras)',
-                neighborhood: 'Praia de Pitangueiras, Guarujá (A pasos de restaurantes y shopping)',
-                price: 90,
-                elevator: 'Sí, 2 ascensores directos',
-                url: 'https://www.airbnb.com/s/Guaruja--State-of-Sao-Paulo--Brazil',
-                img: 'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80',
-                thumbs: [
-                    'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80'
-                ],
-                beds: '2 Dormitorios suites + Sala luminosa.',
-                baths: '2 Baños',
-                mobilityNote: 'Playa con oleaje tranquilo y acera muy transitable.',
-                isRecommended: false
-            }
-        ];
 
         // Camas
         const defaultBeds = [
@@ -1035,6 +934,7 @@
             { room: 'Dormitorio 2 (Cama 2)', bedType: 'Cama 1 Plaza Confort', assignedTo: 'Familiar / Acompañante' }
         ];
 
+        let itineraryDays = [];
         let spOptions = [];
         let rioOptions = [];
         let selectedSpIndex = 0;
@@ -1045,6 +945,7 @@
 
         function initApp() {
             loadState();
+            renderItineraryCards();
             renderSpOptions();
             renderRioOptions();
             renderBeds();
@@ -1058,6 +959,9 @@
 
         function loadState() {
             try {
+                const sDays = localStorage.getItem(STORAGE_DAYS);
+                itineraryDays = sDays ? JSON.parse(sDays) : JSON.parse(JSON.stringify(defaultItineraryDays));
+
                 const sSp = localStorage.getItem(STORAGE_OPTIONS_SP);
                 spOptions = sSp ? JSON.parse(sSp) : defaultSpOptions;
 
@@ -1073,6 +977,7 @@
                 selectedRoute = localStorage.getItem(STORAGE_ROUTE) || 'litoral';
             } catch (e) {
                 console.error(e);
+                itineraryDays = JSON.parse(JSON.stringify(defaultItineraryDays));
                 spOptions = defaultSpOptions;
                 rioOptions = defaultRioOptions;
                 votes = {};
@@ -1082,12 +987,176 @@
         }
 
         function saveAll() {
+            localStorage.setItem(STORAGE_DAYS, JSON.stringify(itineraryDays));
             localStorage.setItem(STORAGE_OPTIONS_SP, JSON.stringify(spOptions));
             localStorage.setItem(STORAGE_OPTIONS_RIO, JSON.stringify(rioOptions));
             localStorage.setItem(STORAGE_VOTES, JSON.stringify(votes));
             localStorage.setItem(STORAGE_BEDS, JSON.stringify(beds));
             localStorage.setItem(STORAGE_ROUTE, selectedRoute);
             flashSavedBadge();
+        }
+
+        function flashSavedBadge() {
+            const b = document.getElementById('global-save-badge');
+            if (b) {
+                b.classList.remove('bg-emerald-800/80');
+                b.classList.add('bg-emerald-500', 'text-white');
+                setTimeout(() => {
+                    b.classList.remove('bg-emerald-500', 'text-white');
+                    b.classList.add('bg-emerald-800/80');
+                }, 900);
+            }
+        }
+
+        // Renderizado Dinámico y 100% Editable del Itinerario
+        function renderItineraryCards() {
+            const container = document.getElementById('itinerary-cards-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            itineraryDays.forEach((day, index) => {
+                const card = document.createElement('div');
+                card.className = "p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3 shadow-sm";
+
+                const hasTicket = day.ticketUrl && day.ticketUrl.trim() !== "";
+                const ticketHtml = hasTicket ? `
+                    <div class="flex items-center gap-2">
+                        <a href="${escapeHtml(day.ticketUrl)}" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition shadow-sm">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>${escapeHtml(day.ticketLabel || 'Ver Ticket / Reserva')}</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                        <button onclick="editDayTicket(${index})" class="text-xs text-slate-500 hover:text-slate-800 underline decoration-slate-300">
+                            <i class="fa-solid fa-pen text-[10px]"></i> Editar Link
+                        </button>
+                    </div>
+                ` : `
+                    <button onclick="editDayTicket(${index})" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-700 font-semibold text-xs border border-dashed border-slate-300 transition">
+                        <i class="fa-solid fa-link text-xs text-blue-600"></i>
+                        <span>+ Agregar Link de Ticket o Reserva</span>
+                    </button>
+                `;
+
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex items-center gap-3">
+                            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-700 to-indigo-700 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm select-none">
+                                <span contenteditable="true" onblur="updateDay(${index}, 'dayNum', this.innerText)">${escapeHtml(day.dayNum)}</span>
+                                <span contenteditable="true" onblur="updateDay(${index}, 'month', this.innerText)" class="text-[9px] font-normal uppercase mt-0.5">${escapeHtml(day.month)}</span>
+                            </div>
+                            <div>
+                                <h4 contenteditable="true" onblur="updateDay(${index}, 'title', this.innerText)" class="font-bold text-sm sm:text-base text-slate-900 leading-snug">
+                                    ${escapeHtml(day.title)}
+                                </h4>
+                                <span class="inline-block text-xs text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded mt-0.5">
+                                    <span contenteditable="true" onblur="updateDay(${index}, 'city', this.innerText)">${escapeHtml(day.city)}</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs ${day.badgeColor || 'bg-slate-200 text-slate-700'} font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5">
+                                <i class="fa-solid ${day.badgeIcon || 'fa-tag'}"></i>
+                                <span contenteditable="true" onblur="updateDay(${index}, 'badge', this.innerText)">${escapeHtml(day.badge)}</span>
+                            </span>
+                            <button onclick="deleteDay(${index})" class="text-slate-300 hover:text-rose-600 text-xs p-1.5 transition" title="Eliminar este día">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Descripción de Actividades -->
+                    <div class="text-xs sm:text-sm text-slate-700 leading-relaxed bg-white p-3 rounded-xl border border-slate-100">
+                        <div contenteditable="true" onblur="updateDay(${index}, 'description', this.innerText)">
+                            ${escapeHtml(day.description)}
+                        </div>
+                    </div>
+
+                    <!-- Fila inferior: Criterio de Salud y Ticket -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pt-1">
+                        <div class="p-2.5 bg-amber-50/80 rounded-xl border border-amber-200/60 text-[11px] text-amber-900 flex items-center gap-2 flex-1">
+                            <i class="fa-solid fa-shield-heart text-amber-600 text-sm shrink-0"></i>
+                            <div contenteditable="true" onblur="updateDay(${index}, 'mobility', this.innerText)" class="w-full">
+                                ${escapeHtml(day.mobility)}
+                            </div>
+                        </div>
+
+                        <div class="shrink-0">
+                            ${ticketHtml}
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function updateDay(index, field, value) {
+            if (itineraryDays[index]) {
+                itineraryDays[index][field] = value.trim();
+                saveAll();
+            }
+        }
+
+        function editDayTicket(index) {
+            const current = itineraryDays[index];
+            if (!current) return;
+
+            const newUrl = prompt("Pega el enlace web del ticket, pasaje o reserva (URL):", current.ticketUrl || "");
+            if (newUrl === null) return; // cancelado
+
+            const newLabel = prompt("Nombre o título del ticket (ej: Tickets Trem do Corcovado, Boleto Bus, etc.):", current.ticketLabel || "Ver Ticket");
+
+            current.ticketUrl = newUrl.trim();
+            current.ticketLabel = (newLabel && newLabel.trim() !== "") ? newLabel.trim() : "Ver Ticket";
+            saveAll();
+            renderItineraryCards();
+        }
+
+        function addItineraryDay() {
+            const nextDayNum = (itineraryDays.length + 12).toString();
+            itineraryDays.push({
+                dayNum: nextDayNum,
+                month: "Nov",
+                title: `Día ${itineraryDays.length + 1}: Nueva Actividad`,
+                city: "Destino / Zona",
+                badge: "Horario / Nota",
+                badgeIcon: "fa-calendar-check",
+                badgeColor: "bg-indigo-100 text-indigo-800",
+                description: "Describe aquí las actividades de la mañana, tarde y noche...",
+                mobility: "Criterio de Salud: Descansos recomendados y accesibilidad...",
+                ticketUrl: "",
+                ticketLabel: "Agregar Ticket"
+            });
+            saveAll();
+            renderItineraryCards();
+        }
+
+        function deleteDay(index) {
+            if (confirm("¿Seguro que deseas eliminar este día del itinerario?")) {
+                itineraryDays.splice(index, 1);
+                saveAll();
+                renderItineraryCards();
+            }
+        }
+
+        function resetItineraryDays() {
+            if (confirm("¿Restaurar el itinerario original con el Cristo Redentor? Se reiniciarán los cambios locales.")) {
+                itineraryDays = JSON.parse(JSON.stringify(defaultItineraryDays));
+                saveAll();
+                renderItineraryCards();
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
 
         function flashSavedBadge() {
@@ -1179,14 +1248,14 @@
 
         function shareItineraryWhatsApp() {
             let txt = `📅 *ITINERARIO FAMILIAR BRASIL 2026 (12-18 NOV)*\n_Con Cristo Redentor & Sin vuelos caros_\n\n`;
-            txt += `✈️ *Mié 12:* Aterrizaje GRU (18:10) ➔ Uber a Jardins/Paulista ➔ Cena ligera y reposo.\n`;
-            txt += `🏙️ *Jue 13:* Av. Paulista & Mirador SESC (Piso 17) ➔ Tarde Parque Ibirapuera ➔ 23:30 Bus Leito Cama 180° a Río.\n`;
-            txt += `🌊 *Vie 14:* Llegada 06:00 a Río ➔ Check-in Copacabana ➔ Tarde en calçadão pavimentado y atardecer.\n`;
-            txt += `⛪ *Sáb 15:* ¡CRISTO REDENTOR! Trem do Corcovado + 3 ascensores panorámicos (Cero escaleras) ➔ Tarde Jardín Botánico.\n`;
-            txt += `🚡 *Dom 16:* Teleférico Pan de Azúcar (100% rampas) ➔ Almuerzo ➔ 23:00 Bus Leito Cama de retorno durmiendo a SP.\n`;
-            txt += `🏮 *Lun 17:* Llegada a SP ➔ Barrio Japonés Liberdade (recorrido en bajada suave) ➔ Cena familiar en Jardins.\n`;
-            txt += `🥪 *Mar 18:* Mercado Municipal (Mezanino con ascensor) ➔ Salida 15:00 a GRU ➔ Retorno a Arequipa (19:10).\n\n`;
-            txt += `🌐 *Ver fotos y Airbnbs interactivos:* https://luistaparazuniga-star.github.io/viaje-brasil-2026/hospedaje.html`;
+            itineraryDays.forEach(d => {
+                txt += `🗓️ *${d.dayNum} ${d.month}:* ${d.title}\n• ${d.city} [${d.badge}]\n• ${d.description}\n`;
+                if (d.ticketUrl && d.ticketUrl.trim() !== "") {
+                    txt += `🎟️ *${d.ticketLabel || 'Ticket'}:* ${d.ticketUrl}\n`;
+                }
+                txt += `\n`;
+            });
+            txt += `🌐 *Ver y editar itinerario en vivo:* https://luistaparazuniga-star.github.io/viaje-brasil-2026/hospedaje.html`;
 
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
         }
