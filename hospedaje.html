@@ -195,25 +195,25 @@
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
             <div class="flex flex-wrap items-center gap-2 bg-slate-200/80 p-1.5 rounded-2xl">
                 <button id="tab-btn-itinerary" onclick="switchCityTab('itinerary')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-indigo-700 shadow-sm">
-                    <i class="fa-solid fa-calendar-days text-indigo-600"></i> 📅 Itinerario Día a Día (12-18 Nov)
+                    <i class="fa-solid fa-calendar-days text-indigo-600"></i> 📅 Itinerario (Con Cristo Redentor)
+                </button>
+                <button id="tab-btn-cristo" onclick="switchCityTab('cristo')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900 bg-amber-50 text-amber-900 border border-amber-200">
+                    <i class="fa-solid fa-cross text-amber-600"></i> ⛪ Cristo Redentor & Costos
+                </button>
+                <button id="tab-btn-rio" onclick="switchCityTab('rio')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-water text-cyan-600"></i> 1. Airbnbs Río (Copacabana)
                 </button>
                 <button id="tab-btn-sp" onclick="switchCityTab('sp')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
-                    <i class="fa-solid fa-city text-blue-600"></i> 1. Airbnbs São Paulo
-                </button>
-                <button id="tab-btn-beach" onclick="switchCityTab('beach')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
-                    <i class="fa-solid fa-umbrella-beach text-emerald-600"></i> 2. Airbnbs Playa Santos
-                </button>
-                <button id="tab-btn-places" onclick="switchCityTab('places')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
-                    <i class="fa-solid fa-landmark text-purple-600"></i> 3. Lugares a Visitar
+                    <i class="fa-solid fa-city text-blue-600"></i> 2. Airbnbs São Paulo
                 </button>
                 <button id="tab-btn-calc" onclick="switchCityTab('calc')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
-                    <i class="fa-solid fa-calculator text-amber-600"></i> 4. Presupuesto & Camas
+                    <i class="fa-solid fa-calculator text-emerald-600"></i> 3. Presupuesto & Camas
                 </button>
             </div>
 
             <div class="text-xs text-slate-500 font-medium">
                 <span class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md font-bold">
-                    <i class="fa-solid fa-check mr-1"></i> Sin Vuelos Internos: +$700 USD Ahorrados
+                    <i class="fa-solid fa-bus mr-1"></i> Río en Bus Leito Cama 180°: -$700 USD Ahorrados
                 </span>
             </div>
         </div>
@@ -283,75 +283,80 @@
                                     <span class="text-[9px] font-normal uppercase">Nov</span>
                                 </span>
                                 <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 2: Jueves &bull; Avenida Paulista, Mirador & Parque Ibirapuera</h4>
-                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">São Paulo &bull; Corazón Cultural</span>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 2: Jueves &bull; São Paulo Cultural ➔ Bus Leito Cama a Río (Noche)</h4>
+                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">São Paulo &bull; Mirador SESC & Parque Ibirapuera</span>
                                 </div>
                             </div>
-                            <span class="text-xs bg-indigo-100 text-indigo-800 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-elevator mr-1"></i> Ascensor Piso 17
+                            <span class="text-xs bg-purple-100 text-purple-900 font-bold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-bed mr-1"></i> Bus Leito 180° (Ahorro de Vuelo)
                             </span>
                         </div>
                         <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana:</strong> Paseo suave por Av. Paulista, vista exterior del icónico MASP y subida al Mirador SESC Paulista (piso 17, ascensor panorámico rápido y terraza plana con cafetería).<br>
-                            <strong>Tarde:</strong> Almuerzo en restaurante con asientos confortables. Traslado al Parque Ibirapuera para descansar junto al lago bajo sombra o recorrer en cuadriciclo/carrito eléctrico.
+                            <strong>Día en SP:</strong> Paseo suave por Av. Paulista, vista al MASP y subida al Mirador SESC (Piso 17, ascensor panorámico). Tarde relajada en el Parque Ibirapuera junto al lago.<br>
+                            <strong>Noche (23:30):</strong> Uber al Terminal Tietê para abordar el <strong>Bus Leito Cama 180°</strong> hacia Río de Janeiro. Se viaja totalmente acostado, con aire acondicionado, frazada y almohada. <em>Ahorramos cientos de dólares de avión y 1 noche de hotel.</em>
                         </p>
-                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
-                            <i class="fa-solid fa-heart-pulse text-blue-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Todo el recorrido cuenta con bancos de descanso cada 40 metros y suelos 100% nivelados.</span>
+                        <div class="p-3 bg-purple-50 rounded-xl border border-purple-200/60 text-[11px] text-purple-900 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-heart text-purple-600 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> El asiento Leito se reclina a 180° plano. Permite dormir toda la noche descansando la espalda sin la compresión de un avión estrecho.</span>
                         </div>
                     </div>
 
                     <!-- Día 3 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-emerald-50/50 border-2 border-emerald-300 hover:border-emerald-500 transition space-y-3">
+                    <div class="p-4 sm:p-5 rounded-2xl bg-cyan-50/60 border border-cyan-200/90 hover:border-cyan-400 transition space-y-3">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                <span class="w-10 h-10 rounded-xl bg-cyan-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
                                     <span>14</span>
                                     <span class="text-[9px] font-normal uppercase">Nov</span>
                                 </span>
                                 <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 3: Viernes &bull; Rumbo al Mar (Santos Gonzaga) & Atardecer</h4>
-                                    <span class="text-xs text-emerald-800 font-semibold bg-emerald-100 px-2 py-0.5 rounded">Costa &bull; A solo 1h 15m de SP (Sin Avión)</span>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 3: Viernes &bull; Llegada a Río de Janeiro & Tarde en Copacabana</h4>
+                                    <span class="text-xs text-cyan-800 font-semibold bg-cyan-100 px-2 py-0.5 rounded">Río de Janeiro &bull; Check-in & Brisa Marina</span>
                                 </div>
                             </div>
-                            <span class="text-xs bg-emerald-200/80 text-emerald-900 font-bold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-van-shuttle mr-1"></i> Traslado Terrestre Directo
+                            <span class="text-xs bg-cyan-200/80 text-cyan-900 font-bold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-water mr-1"></i> Copacabana
                             </span>
                         </div>
                         <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana:</strong> Desayuno tranquilo. A las 10:30 traslado terrestre privado en Uber XL o Van por la autopista moderna de los Inmigrantes (1h 15m sin curvas mareadoras).<br>
-                            <strong>Tarde:</strong> Check-in en el Airbnb frente a la playa en el barrio Gonzaga. Almuerzo de mariscos frescos y caminata al atardecer por la vereda pavimentada de la playa con agua de coco bien fría.
+                            <strong>Mañana (06:00):</strong> Llegada al Terminal Novo Río. Uber directo de 15 minutos al Airbnb en Copacabana (Posto 4-5). Check-in / custodia de equipaje, ducha caliente y desayuno relajado.<br>
+                            <strong>Tarde:</strong> Paseo tranquilo por el calçadão (vereda pavimentada) de Copacabana, atardecer y agua de coco fría en quioscos frente al mar sin pisar arena blanda.
                         </p>
-                        <div class="p-3 bg-emerald-100/70 rounded-xl border border-emerald-300 text-[11px] text-emerald-900 flex items-center gap-2">
-                            <i class="fa-solid fa-circle-check text-emerald-700 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Cero filas de aeropuerto de 3 horas. Llegada puerta a puerta al edificio frente al mar con ascensor.</span>
+                        <div class="p-3 bg-cyan-100/70 rounded-xl border border-cyan-300 text-[11px] text-cyan-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-cyan-700 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> Tarde relajada para aclimatar el cuerpo y descansar bien para la subida al Cristo al día siguiente.</span>
                         </div>
                     </div>
 
-                    <!-- Día 4 -->
-                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-emerald-400 transition space-y-3">
+                    <!-- Día 4: EL CRISTO REDENTOR -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-amber-50/80 border-2 border-amber-400 hover:border-amber-500 shadow-md transition space-y-3">
                         <div class="flex flex-wrap items-center justify-between gap-2">
                             <div class="flex items-center gap-3">
-                                <span class="w-10 h-10 rounded-xl bg-teal-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                <span class="w-10 h-10 rounded-xl bg-amber-500 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-md">
                                     <span>15</span>
                                     <span class="text-[9px] font-normal uppercase">Nov</span>
                                 </span>
                                 <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 4: Sábado &bull; Jardines de la Playa & Museo Oficial del Café</h4>
-                                    <span class="text-xs text-teal-700 font-semibold bg-teal-50 px-2 py-0.5 rounded">Santos &bull; Historia, Brisa & Café Gourmet</span>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 4: Sábado &bull; ¡Ascenso al Cristo Redentor (Corcovado)! ⛪</h4>
+                                    <span class="text-xs text-amber-900 font-bold bg-amber-200/80 px-2.5 py-0.5 rounded">Río de Janeiro &bull; Maravilla del Mundo</span>
                                 </div>
                             </div>
-                            <span class="text-xs bg-teal-100 text-teal-800 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-award mr-1"></i> Récord Guinness
+                            <span class="text-xs bg-amber-200 text-amber-900 font-black px-3 py-1 rounded-lg flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-train"></i> Trem do Corcovado + Ascensores
                             </span>
                         </div>
-                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana:</strong> Paseo por los Jardines de la Playa de Santos (el jardín de playa más extenso del mundo, 5.3 km de flores niveladas). Visita al Palacio y Museo Oficial del Café (edificio histórico con ascensor y salón de cata sentado).<br>
-                            <strong>Tarde:</strong> Almuerzo marinero. Tarde de piscina en el condominio o descanso contemplando las olas.
+                        <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">
+                            <strong>Mañana (08:00):</strong> Uber a la Estación Cosme Velho. Subida en el histórico <strong>Trem do Corcovado</strong> (20 min) a través de la Floresta da Tijuca. Al llegar arriba, usamos los <strong>3 ascensores panorámicos y 4 escaleras mecánicas</strong> para llegar directamente a los pies del Cristo <em>(¡Cero escaleras a pie!)</em>. Vistas de 360° de toda la ciudad.<br>
+                            <strong>Tarde:</strong> Almuerzo y visita relajada al <strong>Jardín Botánico</strong> (senderos completamente planos y sombreados por palmeras gigantes).
                         </p>
-                        <div class="p-3 bg-teal-50 rounded-xl border border-teal-200/60 text-[11px] text-teal-900 flex items-center gap-2">
-                            <i class="fa-solid fa-mug-hot text-teal-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> La cata y museo se disfrutan sentados. En la playa se transita siempre por la vereda pavimentada sin enterrar los pies en la arena.</span>
+                        <div class="p-3 bg-white rounded-xl border border-amber-300 text-[11px] text-amber-950 flex items-center justify-between gap-2">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-ticket text-amber-600 text-base"></i>
+                                <span><strong>Costo Entrada + Tren:</strong> ~R$ 134 - 139 BRL (~$25 USD) adultos &bull; R$ 107 BRL niños &bull; Menores de 6 gratis.</span>
+                            </span>
+                            <button onclick="switchCityTab('cristo')" class="text-xs font-bold text-blue-700 hover:underline shrink-0">
+                                Ver Guía Detallada &rarr;
+                            </button>
                         </div>
                     </div>
 
@@ -364,21 +369,21 @@
                                     <span class="text-[9px] font-normal uppercase">Nov</span>
                                 </span>
                                 <div>
-                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 5: Domingo &bull; Mañana Costera ➔ Retorno Cómodo a São Paulo</h4>
-                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Santos ➔ São Paulo &bull; Autopista Panorámica</span>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 5: Domingo &bull; Pan de Azúcar (Teleférico) ➔ Retorno a SP (Noche)</h4>
+                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Río de Janeiro ➔ São Paulo en Bus Leito</span>
                                 </div>
                             </div>
                             <span class="text-xs bg-indigo-100 text-indigo-800 font-semibold px-2.5 py-1 rounded-lg">
-                                <i class="fa-solid fa-car-side mr-1"></i> 1h 15m en Auto
+                                <i class="fa-solid fa-cable-car mr-1"></i> Teleférico 100% Accesible
                             </span>
                         </div>
                         <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                            <strong>Mañana:</strong> Desayuno relajado con brisa marina. Últimas fotos en el malecón y compras de artesanías locales.<br>
-                            <strong>Mediodía / Tarde:</strong> Almuerzo frente a la playa. A las 14:30 retorno terrestre a São Paulo en Uber/auto privado. Check-in en el Airbnb de São Paulo, tarde libre para descansar y cena cerca al hospedaje.
+                            <strong>Mañana:</strong> Teleférico del Pan de Azúcar (Bondinho) en Urca. Rampas y ascensores en cada estación, vistas maravillosas de la bahía y cafetería con terraza.<br>
+                            <strong>Tarde / Noche:</strong> Almuerzo marinero y tarde de descanso en Copacabana. A las 23:00, abordamos el <strong>Bus Leito Cama</strong> de retorno para dormir cómodamente mientras viajamos de vuelta a São Paulo.
                         </p>
                         <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
                             <i class="fa-solid fa-bed text-blue-600 text-sm shrink-0"></i>
-                            <span><strong>Criterio de Salud:</strong> Viaje corto y pausado. Noche de descanso total para el día siguiente de compras en Liberdade.</span>
+                            <span><strong>Criterio de Salud:</strong> Llegamos a São Paulo descansados al amanecer habiendo ahorrado otra noche de hotel.</span>
                         </div>
                     </div>
 
@@ -441,8 +446,143 @@
         </section>
 
         <!-- ========================================== -->
-        <!-- TAB 1: SÃO PAULO AIRBNBS (BASE PRINCIPAL) -->
+        <!-- TAB 1: GUÍA CRISTO REDENTOR & COSTOS      -->
         <!-- ========================================== -->
+        <section id="section-cristo" class="space-y-6 hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-md space-y-6">
+                <!-- Header con Imagen Hero del Cristo -->
+                <div class="relative rounded-2xl overflow-hidden aspect-[21/9] sm:aspect-[24/8] bg-slate-900 group">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1400&q=80" class="w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500" alt="Cristo Redentor Corcovado">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-5 sm:p-8 text-white">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/30 border border-amber-400/40 text-amber-200 text-xs font-bold w-fit mb-2">
+                            <i class="fa-solid fa-crown text-amber-300"></i> Maravilla del Mundo Moderno
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Cristo Redentor (Cerro del Corcovado)</h3>
+                        <p class="text-xs sm:text-sm text-slate-200 mt-1 max-w-2xl">
+                            Guía oficial de precios, método de ascenso con accesibilidad y recomendaciones clínicas para disfrutarlo en familia.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarjetas de Precios Oficiales Trem do Corcovado 2026 -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-ticket text-amber-600"></i> Precios Oficiales: Trem do Corcovado (2026)
+                        </h4>
+                        <span class="text-xs text-slate-500">Incluye: Tren ida y vuelta + Entrada al Santuario</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- Adulto -->
+                        <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-center space-y-1">
+                            <p class="text-xs font-bold text-amber-800 uppercase tracking-wide">Adulto (Inteira)</p>
+                            <p class="text-2xl font-black text-amber-900">R$ 134 - 139</p>
+                            <p class="text-xs text-slate-600 font-semibold">~$24 - $26 USD por persona</p>
+                            <p class="text-[11px] text-slate-400">Todo incluido ida y vuelta</p>
+                        </div>
+                        <!-- Niños -->
+                        <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 text-center space-y-1">
+                            <p class="text-xs font-bold text-slate-700 uppercase tracking-wide">Niños (7 a 11 años)</p>
+                            <p class="text-2xl font-black text-slate-900">R$ 107 - 112</p>
+                            <p class="text-xs text-slate-600 font-semibold">~$19 - $20 USD</p>
+                            <p class="text-[11px] text-slate-400">Presentando documento</p>
+                        </div>
+                        <!-- Menores de 6 -->
+                        <div class="p-4 rounded-xl bg-emerald-50/70 border border-emerald-200 text-center space-y-1">
+                            <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">Niños hasta 6 años</p>
+                            <p class="text-2xl font-black text-emerald-700">GRATUITO</p>
+                            <p class="text-xs text-emerald-800 font-semibold">$0.00 USD</p>
+                            <p class="text-[11px] text-emerald-600">En brazos del responsable</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bloque Crítico de Movilidad y Accesibilidad: ¡Cero Gradas a Pie! -->
+                <div class="p-5 rounded-2xl bg-gradient-to-r from-blue-900 to-indigo-900 text-white space-y-3 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="w-8 h-8 rounded-lg bg-blue-500/30 flex items-center justify-center text-amber-300">
+                            <i class="fa-solid fa-elevator text-lg"></i>
+                        </span>
+                        <h5 class="text-base font-bold">¿Cómo es la accesibilidad física al subir al Cristo?</h5>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        Muchos turistas creen que hay que subir 220 escalones empinados. <strong>¡No es necesario!</strong> Al descender del tren en la estación superior del Corcovado, hay un sistema moderno de:
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
+                        <div class="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center gap-3">
+                            <i class="fa-solid fa-elevator text-amber-300 text-xl shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">3 Ascensores Panorámicos</strong>
+                                <span class="text-slate-300">Con capacidad para sillas y personas con movilidad moderada.</span>
+                            </div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-white/10 border border-white/10 flex items-center gap-3">
+                            <i class="fa-solid fa-stairs text-emerald-300 text-xl shrink-0"></i>
+                            <div>
+                                <strong class="text-white block">4 Escaleras Mecánicas</strong>
+                                <span class="text-slate-300">Te llevan directamente al mirador sin esfuerzo de rodillas ni fatiga.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consejos Clínicos y Logística de Visita -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <h5 class="font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-blue-600"></i> Horario de Oro Recomendado
+                        </h5>
+                        <p class="text-slate-600 leading-relaxed">
+                            <strong>Primer turno de la mañana (08:00 AM):</strong> Es el horario ideal porque el cielo suele estar completamente despejado (al mediodía sube la neblina marina), la temperatura es fresca y no hay aglomeraciones de personas.
+                        </p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <h5 class="font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-taxi text-emerald-600"></i> Cómo Llegar desde Copacabana
+                        </h5>
+                        <p class="text-slate-600 leading-relaxed">
+                            Pedir un Uber directo a la <strong>Estação Cosme Velho (Rua Cosme Velho, 513)</strong>. El trayecto dura solo 15 a 20 minutos desde Copacabana y el auto nos deja exactamente en la puerta del tren.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+                    <a href="https://www.tremdocorcovado.rio" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition shadow-sm">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <span>Web Oficial: Comprar Billetes Trem do Corcovado</span>
+                    </a>
+                    <button onclick="shareCristoWhatsApp()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Compartir Info del Cristo x WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: RÍO DE JANEIRO AIRBNBS (COPACABANA) -->
+        <!-- ========================================== -->
+        <section id="section-rio" class="space-y-6 hidden">
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-cyan-500"></span>
+                        Opciones de Airbnb en Río de Janeiro (Copacabana Posto 4-5)
+                    </h3>
+                    <p class="text-xs text-slate-500">A 2 cuadras de la vereda de la playa, edificio con ascensor y portería 24h</p>
+                </div>
+                <div class="flex items-center gap-2" id="rio-option-buttons">
+                    <!-- Dinámico por JS -->
+                </div>
+            </div>
+
+            <div id="rio-card-container">
+                <!-- Se inyecta dinámicamente con JS -->
+            </div>
+        </section>
         <section id="section-sp" class="space-y-6">
             <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                 <div>
@@ -788,7 +928,7 @@
     <!-- Logic Script -->
     <script>
         const STORAGE_OPTIONS_SP    = 'brasil_2026_sp_v2';
-        const STORAGE_OPTIONS_BEACH = 'brasil_2026_beach_v2';
+        const STORAGE_OPTIONS_RIO   = 'brasil_2026_rio_v2';
         const STORAGE_VOTES         = 'brasil_2026_votes_v2';
         const STORAGE_BEDS          = 'brasil_2026_beds_v2';
         const STORAGE_FEEDBACK      = 'brasil_2026_feedback_v2';
@@ -806,8 +946,7 @@
                 img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80',
                 thumbs: [
                     'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80',
-                    'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80',
-                    'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80'
+                    'https://images.unsplash.com/photo-1540518614846-7ede433c4ef3?auto=format&fit=crop&w=1000&q=80'
                 ],
                 beds: '2 Dormitorios: 1 Cama Matrimonial Queen + 2 Camas confortables.',
                 baths: '2 Baños completos',
@@ -832,22 +971,42 @@
             }
         ];
 
-        // Opciones por defecto Litoral Santos / Guarujá
-        const defaultBeachOptions = [
+        // Opciones por defecto Río de Janeiro (Copacabana)
+        const defaultRioOptions = [
             {
-                id: 'beach-1',
-                title: 'Opción 1: Vista al Mar y Vereda de Playa en Santos (Gonzaga)',
-                neighborhood: 'Barrio Gonzaga, Santos (La mejor zona comercial y segura)',
-                price: 75,
-                elevator: 'Sí, ascensor y conserjería 24 horas',
-                url: 'https://www.airbnb.com/s/Gonzaga--Santos--State-of-Sao-Paulo--Brazil',
-                img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
+                id: 'rio-1',
+                title: 'Opción 1: Apartamento Familiar a 2 Cdras del Mar en Copacabana',
+                neighborhood: 'Copacabana - Posto 4 (Cerca de Calle Santa Clara)',
+                price: 95,
+                elevator: 'Sí, ascensor amplio sin escalones de entrada y portería 24h',
+                url: 'https://www.airbnb.com/s/Copacabana--Rio-de-Janeiro--Brazil',
+                img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80',
                 thumbs: [
-                    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
-                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80'
+                    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1000&q=80',
+                    'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1000&q=80'
                 ],
-                beds: '2 Dormitorios con vista a la playa: 1 Cama Matrimonial + 2 Camas de 1 plaza.',
+                beds: '2 Dormitorios: 1 Cama Matrimonial King/Queen + 2 Camas individuales.',
                 baths: '2 Baños completos',
+                mobilityNote: 'Calle 100% plana. A 150m del calçadão pavimentado. Fácil acceso a Uber.',
+                isRecommended: true
+            },
+            {
+                id: 'rio-2',
+                title: 'Opción 2: Penthouse con Balcón y Vista Panorámica en Posto 5',
+                neighborhood: 'Copacabana / Posto 5 (Zona tranquila y patrullada)',
+                price: 110,
+                elevator: 'Sí, ascensor directo',
+                url: 'https://www.airbnb.com/s/Copacabana--Rio-de-Janeiro--Brazil',
+                img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80',
+                thumbs: [
+                    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1000&q=80'
+                ],
+                beds: '2 Dormitorios en suite: 2 Camas matrimoniales muy cómodas.',
+                baths: '2 Baños privados',
+                mobilityNote: 'Zona residencial sin discotecas ni ruidos molestos.',
+                isRecommended: false
+            }
+        ];
                 mobilityNote: 'Cruzas la calle y estás en la vereda de mosaico con sombra y quioscos.',
                 isRecommended: true
             },
@@ -877,9 +1036,9 @@
         ];
 
         let spOptions = [];
-        let beachOptions = [];
+        let rioOptions = [];
         let selectedSpIndex = 0;
-        let selectedBeachIndex = 0;
+        let selectedRioIndex = 0;
         let votes = {};
         let beds = [];
         let selectedRoute = 'litoral';
@@ -887,7 +1046,7 @@
         function initApp() {
             loadState();
             renderSpOptions();
-            renderBeachOptions();
+            renderRioOptions();
             renderBeds();
             updateCalculator();
             highlightRouteCard(selectedRoute);
@@ -902,8 +1061,8 @@
                 const sSp = localStorage.getItem(STORAGE_OPTIONS_SP);
                 spOptions = sSp ? JSON.parse(sSp) : defaultSpOptions;
 
-                const sBeach = localStorage.getItem(STORAGE_OPTIONS_BEACH);
-                beachOptions = sBeach ? JSON.parse(sBeach) : defaultBeachOptions;
+                const sRio = localStorage.getItem(STORAGE_OPTIONS_RIO);
+                rioOptions = sRio ? JSON.parse(sRio) : defaultRioOptions;
 
                 const sVotes = localStorage.getItem(STORAGE_VOTES);
                 votes = sVotes ? JSON.parse(sVotes) : {};
@@ -915,7 +1074,7 @@
             } catch (e) {
                 console.error(e);
                 spOptions = defaultSpOptions;
-                beachOptions = defaultBeachOptions;
+                rioOptions = defaultRioOptions;
                 votes = {};
                 beds = defaultBeds;
                 selectedRoute = 'litoral';
@@ -924,7 +1083,7 @@
 
         function saveAll() {
             localStorage.setItem(STORAGE_OPTIONS_SP, JSON.stringify(spOptions));
-            localStorage.setItem(STORAGE_OPTIONS_BEACH, JSON.stringify(beachOptions));
+            localStorage.setItem(STORAGE_OPTIONS_RIO, JSON.stringify(rioOptions));
             localStorage.setItem(STORAGE_VOTES, JSON.stringify(votes));
             localStorage.setItem(STORAGE_BEDS, JSON.stringify(beds));
             localStorage.setItem(STORAGE_ROUTE, selectedRoute);
@@ -963,52 +1122,162 @@
         }
 
         function switchCityTab(tabName) {
-            document.getElementById('section-itinerary').classList.add('hidden');
-            document.getElementById('section-sp').classList.add('hidden');
-            document.getElementById('section-beach').classList.add('hidden');
-            document.getElementById('section-places').classList.add('hidden');
-            document.getElementById('section-calc').classList.add('hidden');
+            const secItinerary = document.getElementById('section-itinerary');
+            const secCristo = document.getElementById('section-cristo');
+            const secRio = document.getElementById('section-rio');
+            const secSp = document.getElementById('section-sp');
+            const secCalc = document.getElementById('section-calc');
+
+            if (secItinerary) secItinerary.classList.add('hidden');
+            if (secCristo) secCristo.classList.add('hidden');
+            if (secRio) secRio.classList.add('hidden');
+            if (secSp) secSp.classList.add('hidden');
+            if (secCalc) secCalc.classList.add('hidden');
 
             const btnItinerary = document.getElementById('tab-btn-itinerary');
+            const btnCristo = document.getElementById('tab-btn-cristo');
+            const btnRio = document.getElementById('tab-btn-rio');
             const btnSp = document.getElementById('tab-btn-sp');
-            const btnBeach = document.getElementById('tab-btn-beach');
-            const btnPlaces = document.getElementById('tab-btn-places');
             const btnCalc = document.getElementById('tab-btn-calc');
 
-            [btnItinerary, btnSp, btnBeach, btnPlaces, btnCalc].forEach(b => {
+            [btnItinerary, btnCristo, btnRio, btnSp, btnCalc].forEach(b => {
                 if (b) b.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900";
             });
 
             if (tabName === 'itinerary') {
-                document.getElementById('section-itinerary').classList.remove('hidden');
+                if (secItinerary) secItinerary.classList.remove('hidden');
                 if (btnItinerary) btnItinerary.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-indigo-700 shadow-sm";
+            } else if (tabName === 'cristo') {
+                if (secCristo) secCristo.classList.remove('hidden');
+                if (btnCristo) btnCristo.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-amber-500 text-white shadow-sm";
+            } else if (tabName === 'rio') {
+                if (secRio) secRio.classList.remove('hidden');
+                if (btnRio) btnRio.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-cyan-700 shadow-sm";
             } else if (tabName === 'sp') {
-                document.getElementById('section-sp').classList.remove('hidden');
+                if (secSp) secSp.classList.remove('hidden');
                 if (btnSp) btnSp.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-blue-700 shadow-sm";
-            } else if (tabName === 'beach') {
-                document.getElementById('section-beach').classList.remove('hidden');
-                if (btnBeach) btnBeach.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-emerald-700 shadow-sm";
-            } else if (tabName === 'places') {
-                document.getElementById('section-places').classList.remove('hidden');
-                if (btnPlaces) btnPlaces.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-purple-700 shadow-sm";
             } else if (tabName === 'calc') {
-                document.getElementById('section-calc').classList.remove('hidden');
-                if (btnCalc) btnCalc.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-amber-700 shadow-sm";
+                if (secCalc) secCalc.classList.remove('hidden');
+                if (btnCalc) btnCalc.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-emerald-700 shadow-sm";
             }
         }
 
+        function shareCristoWhatsApp() {
+            let txt = `⛪ *DATOS Y COSTOS: CRISTO REDENTOR (RÍO 2026)*\n\n`;
+            txt += `🎫 *Entrada + Trem do Corcovado (Ida y Vuelta):*\n`;
+            txt += `• Adultos: R$ 134 - 139 (~$25 USD)\n`;
+            txt += `• Niños (7 a 11): R$ 107 - 112 (~$19 USD)\n`;
+            txt += `• Menores de 6 años: ¡Gratis!\n\n`;
+            txt += `♿ *Accesibilidad Física:*\n`;
+            txt += `¡CERO escaleras a pie! Al bajar del tren hay 3 ascensores panorámicos y 4 escaleras mecánicas hasta la cima.\n\n`;
+            txt += `⏰ *Horario sugerido:* 08:00 AM (primer turno, cielo despejado y fresco).\n`;
+            txt += `🚖 *Traslado:* Uber de 15 min desde Copacabana a la Estação Cosme Velho.\n\n`;
+            txt += `🌐 *Ver info completa y web oficial:* https://luistaparazuniga-star.github.io/viaje-brasil-2026/hospedaje.html`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+        }
+
         function shareItineraryWhatsApp() {
-            let txt = `📅 *ITINERARIO FAMILIAR BRASIL 2026 (12-18 NOV)*\n_Ruta Optimizada & Accesible (Sin vuelos caros)_\n\n`;
+            let txt = `📅 *ITINERARIO FAMILIAR BRASIL 2026 (12-18 NOV)*\n_Con Cristo Redentor & Sin vuelos caros_\n\n`;
             txt += `✈️ *Mié 12:* Aterrizaje GRU (18:10) ➔ Uber a Jardins/Paulista ➔ Cena ligera y reposo.\n`;
-            txt += `🏙️ *Jue 13:* Av. Paulista ➔ Mirador SESC (Piso 17 ascensor) ➔ Tarde en Parque Ibirapuera junto al lago.\n`;
-            txt += `🏖️ *Vie 14:* Traslado terrestre (1h 15m) a Santos Gonzaga ➔ Check-in playa ➔ Atardecer en vereda de jardines.\n`;
-            txt += `☕ *Sáb 15:* Jardines de la Playa (Récord Guinness) ➔ Palacio Oficial del Café (ascensor & cata sentados).\n`;
-            txt += `🚗 *Dom 16:* Mañana de brisa marina ➔ Retorno relajado por autopista a São Paulo ➔ Descanso.\n`;
-            txt += `🏮 *Lun 17:* Barrio Japonés Liberdade (recorrido en bajada suave) ➔ Compras ➔ Cena familiar en Jardins.\n`;
+            txt += `🏙️ *Jue 13:* Av. Paulista & Mirador SESC (Piso 17) ➔ Tarde Parque Ibirapuera ➔ 23:30 Bus Leito Cama 180° a Río.\n`;
+            txt += `🌊 *Vie 14:* Llegada 06:00 a Río ➔ Check-in Copacabana ➔ Tarde en calçadão pavimentado y atardecer.\n`;
+            txt += `⛪ *Sáb 15:* ¡CRISTO REDENTOR! Trem do Corcovado + 3 ascensores panorámicos (Cero escaleras) ➔ Tarde Jardín Botánico.\n`;
+            txt += `🚡 *Dom 16:* Teleférico Pan de Azúcar (100% rampas) ➔ Almuerzo ➔ 23:00 Bus Leito Cama de retorno durmiendo a SP.\n`;
+            txt += `🏮 *Lun 17:* Llegada a SP ➔ Barrio Japonés Liberdade (recorrido en bajada suave) ➔ Cena familiar en Jardins.\n`;
             txt += `🥪 *Mar 18:* Mercado Municipal (Mezanino con ascensor) ➔ Salida 15:00 a GRU ➔ Retorno a Arequipa (19:10).\n\n`;
             txt += `🌐 *Ver fotos y Airbnbs interactivos:* https://luistaparazuniga-star.github.io/viaje-brasil-2026/hospedaje.html`;
 
             window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+        }
+
+        // Render Río de Janeiro (Copacabana)
+        function renderRioOptions() {
+            const btnContainer = document.getElementById('rio-option-buttons');
+            const cardContainer = document.getElementById('rio-card-container');
+            if (!btnContainer || !cardContainer) return;
+
+            btnContainer.innerHTML = '';
+            rioOptions.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                const isSelected = idx === selectedRioIndex;
+                btn.className = `px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 ${
+                    isSelected ? 'bg-cyan-600 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                }`;
+                btn.innerHTML = `<span>Opción ${idx + 1}</span> ${opt.isRecommended ? '<span class="text-[10px] bg-cyan-800 text-cyan-100 px-1 rounded">⭐ Top</span>' : ''}`;
+                btn.onclick = () => { selectedRioIndex = idx; renderRioOptions(); };
+                btnContainer.appendChild(btn);
+            });
+
+            const current = rioOptions[selectedRioIndex] || rioOptions[0];
+            const currentVote = votes[current.id] || null;
+
+            cardContainer.innerHTML = `
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden">
+                    <div class="bg-gradient-to-r from-cyan-600 to-teal-700 text-white p-4 sm:p-6 flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <span class="bg-white/20 text-white text-[11px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                                ${current.neighborhood}
+                            </span>
+                            <h3 class="text-xl sm:text-2xl font-bold mt-1">${current.title}</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-cyan-100">Costo aproximado</span>
+                            <p class="text-2xl font-black">~$${current.price} <span class="text-xs font-medium">USD / noche</span></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 sm:p-7">
+                        <div class="lg:col-span-5 space-y-3">
+                            <div class="relative rounded-xl overflow-hidden shadow-inner aspect-[4/3] bg-slate-100">
+                                <img src="${current.img}" class="w-full h-full object-cover" alt="Airbnb Río">
+                                <span class="absolute bottom-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-xs px-2.5 py-1 rounded font-medium">
+                                    <i class="fa-solid fa-elevator text-amber-400 mr-1"></i> ${current.elevator}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-7 flex flex-col justify-between space-y-4">
+                            <div class="space-y-3">
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-3">
+                                    <p class="text-xs font-bold text-slate-800">¿Qué opina la familia?</p>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="voteOption('${current.id}', 'love')" class="vote-btn px-3 py-1 rounded-lg border text-xs font-semibold ${currentVote === 'love' ? 'active bg-rose-50 border-rose-300 text-rose-600' : 'bg-white border-slate-200 text-slate-600'}">
+                                            ❤️ Me encanta
+                                        </button>
+                                        <button onclick="voteOption('${current.id}', 'like')" class="vote-btn px-3 py-1 rounded-lg border text-xs font-semibold ${currentVote === 'like' ? 'active bg-cyan-50 border-cyan-300 text-cyan-700' : 'bg-white border-slate-200 text-slate-600'}">
+                                            👍 Buena opción
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 rounded-xl bg-slate-50 border border-slate-100 space-y-2 text-xs">
+                                    <h5 class="font-bold text-slate-700 flex items-center gap-2">
+                                        <i class="fa-solid fa-bed text-cyan-600"></i> Distribución de Camas:
+                                    </h5>
+                                    <p class="text-slate-700">${current.beds}</p>
+                                    <p class="text-slate-500"><i class="fa-solid fa-bath text-cyan-600"></i> ${current.baths}</p>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-cyan-50/80 border border-cyan-200 text-cyan-900 text-xs space-y-1">
+                                    <p class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-shield-heart text-cyan-700"></i> Accesibilidad:</p>
+                                    <p>${current.mobilityNote}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                                <a href="${current.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow-sm">
+                                    <i class="fa-brands fa-airbnb text-sm"></i>
+                                    <span>Ver en Airbnb</span>
+                                </a>
+                                <button onclick="editAirbnbUrl('rio', ${selectedRioIndex})" class="text-xs text-slate-500 hover:text-slate-800 underline">
+                                    Editar Link de Airbnb
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         // Render São Paulo
