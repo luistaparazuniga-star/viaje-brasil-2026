@@ -191,29 +191,254 @@
             </div>
         </section>
 
-        <!-- Navigation Tabs for Airbnb Options -->
+        <!-- Navigation Tabs for Airbnb Options & Itinerario -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-            <div class="flex items-center gap-2 bg-slate-200/80 p-1 rounded-xl">
-                <button id="tab-btn-sp" onclick="switchCityTab('sp')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-blue-700 shadow-sm">
-                    <i class="fa-solid fa-city text-blue-600"></i> 1. São Paulo (Jardins / Paulista)
+            <div class="flex flex-wrap items-center gap-2 bg-slate-200/80 p-1.5 rounded-2xl">
+                <button id="tab-btn-itinerary" onclick="switchCityTab('itinerary')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-indigo-700 shadow-sm">
+                    <i class="fa-solid fa-calendar-days text-indigo-600"></i> 📅 Itinerario Día a Día (12-18 Nov)
                 </button>
-                <button id="tab-btn-beach" onclick="switchCityTab('beach')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
-                    <i class="fa-solid fa-umbrella-beach text-emerald-600"></i> 2. Playa Santos / Guarujá
+                <button id="tab-btn-sp" onclick="switchCityTab('sp')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-city text-blue-600"></i> 1. Airbnbs São Paulo
                 </button>
-                <button id="tab-btn-places" onclick="switchCityTab('places')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                <button id="tab-btn-beach" onclick="switchCityTab('beach')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-umbrella-beach text-emerald-600"></i> 2. Airbnbs Playa Santos
+                </button>
+                <button id="tab-btn-places" onclick="switchCityTab('places')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
                     <i class="fa-solid fa-landmark text-purple-600"></i> 3. Lugares a Visitar
                 </button>
-                <button id="tab-btn-calc" onclick="switchCityTab('calc')" class="px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
+                <button id="tab-btn-calc" onclick="switchCityTab('calc')" class="px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900">
                     <i class="fa-solid fa-calculator text-amber-600"></i> 4. Presupuesto & Camas
                 </button>
             </div>
 
             <div class="text-xs text-slate-500 font-medium">
                 <span class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md font-bold">
-                    <i class="fa-solid fa-check mr-1"></i> Ahorro en Vuelos: +$700 USD
+                    <i class="fa-solid fa-check mr-1"></i> Sin Vuelos Internos: +$700 USD Ahorrados
                 </span>
             </div>
         </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 0: ITINERARIO DÍA A DÍA (COMPLETO)     -->
+        <!-- ========================================== -->
+        <section id="section-itinerary" class="space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-4 border-b border-slate-100">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-indigo-100 text-indigo-800 uppercase tracking-wider">
+                                7 Días &bull; 12 al 18 Noviembre 2026
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 uppercase tracking-wider">
+                                Ruta Terrestre Accesible
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+                            <span>Itinerario Familiar Detallado: São Paulo & Playa de Santos</span>
+                        </h3>
+                        <p class="text-xs text-slate-500">Diseñado sin apuros, con pausas de descanso y traslados cómodos puerta a puerta</p>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="shareItineraryWhatsApp()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-sm transition">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Itinerario x WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timeline Cards Día por Día -->
+                <div class="space-y-4">
+                    <!-- Día 1 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-blue-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>12</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 1: Miércoles &bull; Llegada a Brasil & Reposo</h4>
+                                    <span class="text-xs text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded">São Paulo &bull; Hospedaje en Jardins / Paulista</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-slate-200/80 text-slate-700 font-semibold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-plane-arrival mr-1 text-blue-600"></i> Aterrizaje 18:10 (GRU)
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            Llegada al Aeropuerto de Guarulhos (GRU). Traslado directo en Uber Comfort o Black al Airbnb en Jardins / Paulista (45-60 min). Check-in asistido sin escaleras, cena ligera en el departamento y descanso absoluto para reponer energías.
+                        </p>
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200/60 text-[11px] text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-heart text-amber-600 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> Cero esfuerzo físico tras el vuelo internacional. Uso exclusivo de ascensor y descanso en cama confortable.</span>
+                        </div>
+                    </div>
+
+                    <!-- Día 2 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>13</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 2: Jueves &bull; Avenida Paulista, Mirador & Parque Ibirapuera</h4>
+                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">São Paulo &bull; Corazón Cultural</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 font-semibold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-elevator mr-1"></i> Ascensor Piso 17
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <strong>Mañana:</strong> Paseo suave por Av. Paulista, vista exterior del icónico MASP y subida al Mirador SESC Paulista (piso 17, ascensor panorámico rápido y terraza plana con cafetería).<br>
+                            <strong>Tarde:</strong> Almuerzo en restaurante con asientos confortables. Traslado al Parque Ibirapuera para descansar junto al lago bajo sombra o recorrer en cuadriciclo/carrito eléctrico.
+                        </p>
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-heart-pulse text-blue-600 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> Todo el recorrido cuenta con bancos de descanso cada 40 metros y suelos 100% nivelados.</span>
+                        </div>
+                    </div>
+
+                    <!-- Día 3 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-emerald-50/50 border-2 border-emerald-300 hover:border-emerald-500 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>14</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 3: Viernes &bull; Rumbo al Mar (Santos Gonzaga) & Atardecer</h4>
+                                    <span class="text-xs text-emerald-800 font-semibold bg-emerald-100 px-2 py-0.5 rounded">Costa &bull; A solo 1h 15m de SP (Sin Avión)</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-emerald-200/80 text-emerald-900 font-bold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-van-shuttle mr-1"></i> Traslado Terrestre Directo
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <strong>Mañana:</strong> Desayuno tranquilo. A las 10:30 traslado terrestre privado en Uber XL o Van por la autopista moderna de los Inmigrantes (1h 15m sin curvas mareadoras).<br>
+                            <strong>Tarde:</strong> Check-in en el Airbnb frente a la playa en el barrio Gonzaga. Almuerzo de mariscos frescos y caminata al atardecer por la vereda pavimentada de la playa con agua de coco bien fría.
+                        </p>
+                        <div class="p-3 bg-emerald-100/70 rounded-xl border border-emerald-300 text-[11px] text-emerald-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-700 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> Cero filas de aeropuerto de 3 horas. Llegada puerta a puerta al edificio frente al mar con ascensor.</span>
+                        </div>
+                    </div>
+
+                    <!-- Día 4 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-emerald-400 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-teal-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>15</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 4: Sábado &bull; Jardines de la Playa & Museo Oficial del Café</h4>
+                                    <span class="text-xs text-teal-700 font-semibold bg-teal-50 px-2 py-0.5 rounded">Santos &bull; Historia, Brisa & Café Gourmet</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-teal-100 text-teal-800 font-semibold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-award mr-1"></i> Récord Guinness
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <strong>Mañana:</strong> Paseo por los Jardines de la Playa de Santos (el jardín de playa más extenso del mundo, 5.3 km de flores niveladas). Visita al Palacio y Museo Oficial del Café (edificio histórico con ascensor y salón de cata sentado).<br>
+                            <strong>Tarde:</strong> Almuerzo marinero. Tarde de piscina en el condominio o descanso contemplando las olas.
+                        </p>
+                        <div class="p-3 bg-teal-50 rounded-xl border border-teal-200/60 text-[11px] text-teal-900 flex items-center gap-2">
+                            <i class="fa-solid fa-mug-hot text-teal-600 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> La cata y museo se disfrutan sentados. En la playa se transita siempre por la vereda pavimentada sin enterrar los pies en la arena.</span>
+                        </div>
+                    </div>
+
+                    <!-- Día 5 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>16</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 5: Domingo &bull; Mañana Costera ➔ Retorno Cómodo a São Paulo</h4>
+                                    <span class="text-xs text-indigo-700 font-semibold bg-indigo-50 px-2 py-0.5 rounded">Santos ➔ São Paulo &bull; Autopista Panorámica</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-indigo-100 text-indigo-800 font-semibold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-car-side mr-1"></i> 1h 15m en Auto
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <strong>Mañana:</strong> Desayuno relajado con brisa marina. Últimas fotos en el malecón y compras de artesanías locales.<br>
+                            <strong>Mediodía / Tarde:</strong> Almuerzo frente a la playa. A las 14:30 retorno terrestre a São Paulo en Uber/auto privado. Check-in en el Airbnb de São Paulo, tarde libre para descansar y cena cerca al hospedaje.
+                        </p>
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-bed text-blue-600 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> Viaje corto y pausado. Noche de descanso total para el día siguiente de compras en Liberdade.</span>
+                        </div>
+                    </div>
+
+                    <!-- Día 6 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-rose-300 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-rose-600 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>17</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 6: Lunes &bull; Barrio Japonés de Liberdade & Cena de Despedida</h4>
+                                    <span class="text-xs text-rose-700 font-semibold bg-rose-50 px-2 py-0.5 rounded">São Paulo &bull; Cultura Asiática & Recuerdos</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-rose-100 text-rose-800 font-semibold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-bag-shopping mr-1"></i> Compras & Gastronomía
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <strong>Mañana / Tarde:</strong> Visita al Barrio Japonés Liberdade (el más grande fuera de Japón). Faroles rojos tradicionales, tiendas de souvenirs, cosmética y pastelería oriental.<br>
+                            <strong>Tarde / Noche:</strong> Café en jardín zen y cena especial de despedida familiar en un restaurante emblemático de Jardins.
+                        </p>
+                        <div class="p-3 bg-rose-50 rounded-xl border border-rose-200/60 text-[11px] text-rose-900 flex items-center gap-2">
+                            <i class="fa-solid fa-person-walking text-rose-600 text-sm shrink-0"></i>
+                            <span><strong>Técnica de Movilidad Clave:</strong> El Uber nos dejará en la parte ALTA de la calle Galvão Bueno para hacer todo el recorrido en pendiente de bajada sin fatigarse.</span>
+                        </div>
+                    </div>
+
+                    <!-- Día 7 -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-blue-400 transition space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-10 h-10 rounded-xl bg-blue-700 text-white flex flex-col items-center justify-center font-black text-xs leading-none shadow-sm">
+                                    <span>18</span>
+                                    <span class="text-[9px] font-normal uppercase">Nov</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-bold text-sm sm:text-base text-slate-900">Día 7: Martes &bull; Mercado Municipal (Mezanino) & Vuelo de Retorno</h4>
+                                    <span class="text-xs text-blue-800 font-semibold bg-blue-50 px-2 py-0.5 rounded">São Paulo ➔ Arequipa &bull; Despedida de Brasil</span>
+                                </div>
+                            </div>
+                            <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2.5 py-1 rounded-lg">
+                                <i class="fa-solid fa-plane-departure mr-1"></i> Vuelo Retorno 19:10
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <strong>Mañana:</strong> Check-out y custodia de maletas. Visita al histórico Mercado Municipal ("Mercadão") con sus vitrales de colores.<br>
+                            <strong>Almuerzo:</strong> Subida en ascensor directo al segundo piso (*Mezanino*) para degustar el legendario sándwich artesanal y pastel de bacalao con servicio a la mesa.<br>
+                            <strong>Tarde:</strong> A las 15:00 salida con suficiente margen hacia GRU en Uber para el vuelo internacional de retorno (19:10).
+                        </p>
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200/60 text-[11px] text-blue-900 flex items-center gap-2">
+                            <i class="fa-solid fa-wheelchair text-blue-600 text-sm shrink-0"></i>
+                            <span><strong>Criterio de Salud:</strong> Salida a GRU con 4 horas de margen para evitar prisas y solicitar asistencia con carrito/silla en mostrador.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ========================================== -->
         <!-- TAB 1: SÃO PAULO AIRBNBS (BASE PRINCIPAL) -->
@@ -666,6 +891,7 @@
             renderBeds();
             updateCalculator();
             highlightRouteCard(selectedRoute);
+            switchCityTab('itinerary');
 
             const savedFb = localStorage.getItem(STORAGE_FEEDBACK);
             if (savedFb) document.getElementById('family-feedback-text').value = savedFb;
@@ -737,33 +963,52 @@
         }
 
         function switchCityTab(tabName) {
+            document.getElementById('section-itinerary').classList.add('hidden');
             document.getElementById('section-sp').classList.add('hidden');
             document.getElementById('section-beach').classList.add('hidden');
             document.getElementById('section-places').classList.add('hidden');
             document.getElementById('section-calc').classList.add('hidden');
 
+            const btnItinerary = document.getElementById('tab-btn-itinerary');
             const btnSp = document.getElementById('tab-btn-sp');
             const btnBeach = document.getElementById('tab-btn-beach');
             const btnPlaces = document.getElementById('tab-btn-places');
             const btnCalc = document.getElementById('tab-btn-calc');
 
-            [btnSp, btnBeach, btnPlaces, btnCalc].forEach(b => {
-                b.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900";
+            [btnItinerary, btnSp, btnBeach, btnPlaces, btnCalc].forEach(b => {
+                if (b) b.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 text-slate-600 hover:text-slate-900";
             });
 
-            if (tabName === 'sp') {
+            if (tabName === 'itinerary') {
+                document.getElementById('section-itinerary').classList.remove('hidden');
+                if (btnItinerary) btnItinerary.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-indigo-700 shadow-sm";
+            } else if (tabName === 'sp') {
                 document.getElementById('section-sp').classList.remove('hidden');
-                btnSp.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-blue-700 shadow-sm";
+                if (btnSp) btnSp.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-blue-700 shadow-sm";
             } else if (tabName === 'beach') {
                 document.getElementById('section-beach').classList.remove('hidden');
-                btnBeach.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-emerald-700 shadow-sm";
+                if (btnBeach) btnBeach.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-emerald-700 shadow-sm";
             } else if (tabName === 'places') {
                 document.getElementById('section-places').classList.remove('hidden');
-                btnPlaces.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-purple-700 shadow-sm";
+                if (btnPlaces) btnPlaces.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-purple-700 shadow-sm";
             } else if (tabName === 'calc') {
                 document.getElementById('section-calc').classList.remove('hidden');
-                btnCalc.className = "px-4 py-2 rounded-lg text-xs font-bold transition flex items-center gap-2 bg-white text-amber-700 shadow-sm";
+                if (btnCalc) btnCalc.className = "px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 bg-white text-amber-700 shadow-sm";
             }
+        }
+
+        function shareItineraryWhatsApp() {
+            let txt = `📅 *ITINERARIO FAMILIAR BRASIL 2026 (12-18 NOV)*\n_Ruta Optimizada & Accesible (Sin vuelos caros)_\n\n`;
+            txt += `✈️ *Mié 12:* Aterrizaje GRU (18:10) ➔ Uber a Jardins/Paulista ➔ Cena ligera y reposo.\n`;
+            txt += `🏙️ *Jue 13:* Av. Paulista ➔ Mirador SESC (Piso 17 ascensor) ➔ Tarde en Parque Ibirapuera junto al lago.\n`;
+            txt += `🏖️ *Vie 14:* Traslado terrestre (1h 15m) a Santos Gonzaga ➔ Check-in playa ➔ Atardecer en vereda de jardines.\n`;
+            txt += `☕ *Sáb 15:* Jardines de la Playa (Récord Guinness) ➔ Palacio Oficial del Café (ascensor & cata sentados).\n`;
+            txt += `🚗 *Dom 16:* Mañana de brisa marina ➔ Retorno relajado por autopista a São Paulo ➔ Descanso.\n`;
+            txt += `🏮 *Lun 17:* Barrio Japonés Liberdade (recorrido en bajada suave) ➔ Compras ➔ Cena familiar en Jardins.\n`;
+            txt += `🥪 *Mar 18:* Mercado Municipal (Mezanino con ascensor) ➔ Salida 15:00 a GRU ➔ Retorno a Arequipa (19:10).\n\n`;
+            txt += `🌐 *Ver fotos y Airbnbs interactivos:* https://luistaparazuniga-star.github.io/viaje-brasil-2026/hospedaje.html`;
+
+            window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
         }
 
         // Render São Paulo
