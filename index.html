@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planificador de Viaje: Brasil 2026</title>
+
+    <!-- PWA Meta Tags & Icons -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#312e81">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Brasil 2026">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="shortcut icon" href="favicon.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -54,6 +68,9 @@
             </div>
             
             <div class="flex flex-wrap items-center gap-2 no-print">
+                <button id="pwa-install-btn" onclick="triggerPwaInstall()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-xs px-3.5 py-2 rounded-lg font-bold transition flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-mobile-screen-button"></i> Instalar App
+                </button>
                 <a href="hospedaje.html" class="bg-emerald-500 hover:bg-emerald-400 text-white text-xs px-3.5 py-2 rounded-lg font-medium transition flex items-center gap-1.5 shadow-sm">
                     <i class="fa-solid fa-house-chimney-window"></i> Ver Airbnbs
                 </a>
@@ -530,24 +547,142 @@
                 .replace(/'/g, "&#039;");
         }
 
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', loadData);
-    </script>
-</body>
-</html>
+        // ==========================================
+        // PWA INSTALLATION & SERVICE WORKER LOGIC
+        // ==========================================
+        let deferredPrompt = null;
 
-        function escapeHtml(str) {
-            if (!str) return '';
-            return str
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((reg) => console.log('PWA ServiceWorker listo en scope:', reg.scope))
+                    .catch((err) => console.log('Error registrando ServiceWorker:', err));
+            });
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            const btn = document.getElementById('pwa-install-btn');
+            if (btn) {
+                btn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-300"></i> App Instalada`;
+                btn.className = "bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-lg font-bold flex items-center gap-1.5 shadow-sm";
+            }
+        });
+
+        function isRunningStandalone() {
+            return (window.matchMedia('(display-mode: standalone)').matches) || 
+                   (window.navigator.standalone === true) || 
+                   document.referrer.includes('android-app://');
+        }
+
+        function isIos() {
+            return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+        }
+
+        function triggerPwaInstall() {
+            if (isRunningStandalone()) {
+                alert("¡Ya estás usando la app instalada! ✨");
+                return;
+            }
+
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(() => {
+                    deferredPrompt = null;
+                });
+            } else {
+                openPwaModal();
+            }
+        }
+
+        function openPwaModal() {
+            const modal = document.getElementById('pwa-install-modal');
+            const iosSteps = document.getElementById('pwa-ios-steps');
+            const androidSteps = document.getElementById('pwa-android-steps');
+
+            if (isIos()) {
+                if (iosSteps) iosSteps.classList.remove('hidden');
+                if (androidSteps) androidSteps.classList.add('hidden');
+            } else {
+                if (androidSteps) androidSteps.classList.remove('hidden');
+                if (iosSteps) iosSteps.classList.add('hidden');
+            }
+
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closePwaModal() {
+            const modal = document.getElementById('pwa-install-modal');
+            if (modal) modal.classList.add('hidden');
         }
 
         // Inicialización
-        document.addEventListener('DOMContentLoaded', loadData);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            if (isRunningStandalone()) {
+                const btn = document.getElementById('pwa-install-btn');
+                if (btn) {
+                    btn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-300"></i> App Instalada`;
+                    btn.className = "bg-emerald-700 text-white text-xs px-3.5 py-2 rounded-lg font-bold flex items-center gap-1.5 shadow-sm";
+                }
+            }
+        });
     </script>
+
+    <!-- PWA Instructions Modal (iOS / Android fallback) -->
+    <div id="pwa-install-modal" class="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-5">
+            <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <img src="icon-192.png" alt="App Icon" class="w-12 h-12 rounded-2xl shadow-md border border-slate-100">
+                    <div>
+                        <h3 class="text-base font-extrabold text-slate-900 leading-tight">Instalar App Brasil 2026</h3>
+                        <p class="text-xs text-slate-500">Úsala a pantalla completa como una app nativa</p>
+                    </div>
+                </div>
+                <button onclick="closePwaModal()" class="text-slate-400 hover:text-slate-700 p-1.5 rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Steps for iPhone / iPad (Safari) -->
+            <div id="pwa-ios-steps" class="space-y-3 bg-indigo-50/70 p-4 rounded-2xl border border-indigo-100 text-xs text-slate-700">
+                <p class="font-bold text-indigo-950 flex items-center gap-2 text-sm">
+                    <i class="fa-brands fa-apple text-base text-slate-900"></i> Para iPhone o iPad (Safari):
+                </p>
+                <ol class="space-y-2 list-decimal list-inside text-slate-600 leading-relaxed">
+                    <li>Toca el botón <strong>Compartir</strong> <i class="fa-solid fa-arrow-up-from-bracket text-blue-600 mx-1"></i> en la barra inferior de Safari.</li>
+                    <li>Desliza hacia abajo y pulsa <strong>"Agregar a la pantalla de inicio"</strong> <i class="fa-regular fa-square-plus text-slate-800 mx-1"></i>.</li>
+                    <li>Toca <strong>"Agregar"</strong> arriba a la derecha. ¡Listo! Se abrirá como app propia.</li>
+                </ol>
+            </div>
+
+            <!-- Steps for Android / Chrome -->
+            <div id="pwa-android-steps" class="space-y-3 bg-emerald-50/70 p-4 rounded-2xl border border-emerald-100 text-xs text-slate-700">
+                <p class="font-bold text-emerald-950 flex items-center gap-2 text-sm">
+                    <i class="fa-brands fa-android text-base text-emerald-600"></i> Para Android (Chrome / Navegador):
+                </p>
+                <ol class="space-y-2 list-decimal list-inside text-slate-600 leading-relaxed">
+                    <li>Toca los <strong>3 puntos</strong> <i class="fa-solid fa-ellipsis-vertical text-slate-700 mx-1"></i> en la esquina superior derecha.</li>
+                    <li>Selecciona <strong>"Instalar aplicación"</strong> o <strong>"Agregar a la pantalla principal"</strong>.</li>
+                    <li>Confirma <strong>"Instalar"</strong>. Se añadirá el icono en tu pantalla de inicio.</li>
+                </ol>
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+                <span class="text-[11px] text-slate-400 flex items-center gap-1">
+                    <i class="fa-solid fa-bolt text-amber-500"></i> Funciona sin conexión a internet
+                </span>
+                <button onclick="closePwaModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition">
+                    Entendido
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

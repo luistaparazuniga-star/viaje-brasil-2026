@@ -1,0 +1,62 @@
+{
+  "name": "Brasil 2026 • Plan Familiar",
+  "short_name": "Brasil 2026",
+  "description": "Itinerario interactivo, hospedajes Airbnb, Cristo Redentor y presupuesto familiar Brasil 2026",
+  "start_url": "hospedaje.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#312e81",
+  "lang": "es",
+  "categories": ["travel", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Itinerario Día a Día",
+      "short_name": "Itinerario",
+      "description": "Ver el itinerario con Plan A y Plan B",
+      "url": "hospedaje.html#section-itinerary",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Cristo Redentor & Costos",
+      "short_name": "Cristo",
+      "description": "Tarifas de Trem do Corcovado y accesibilidad",
+      "url": "hospedaje.html#section-cristo",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Airbnbs Copacabana",
+      "short_name": "Hospedaje Río",
+      "description": "Opciones de departamentos en Copacabana",
+      "url": "hospedaje.html#section-rio",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
